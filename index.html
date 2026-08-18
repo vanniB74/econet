@@ -16,6 +16,139 @@
       max-width: 100%;
       height: auto;
     }
+    
+    /* ========== DARK MODE ========== */
+    body.dark-mode {
+      background-color: #0f172a;
+      color: #e2e8f0;
+    }
+    
+    body.dark-mode .navbar {
+      background-color: #1e293b;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    body.dark-mode .nav-links a {
+      color: #cbd5e1;
+    }
+    
+    body.dark-mode .nav-links a:hover {
+      color: #4ade80;
+    }
+    
+    body.dark-mode .lang-btn {
+      border-color: #334155;
+      background-color: #1e293b;
+      color: #cbd5e1;
+    }
+    
+    body.dark-mode .lang-btn:hover {
+      border-color: #4ade80;
+      color: #4ade80;
+    }
+    
+    body.dark-mode .lang-dropdown {
+      background-color: #1e293b;
+      border-color: #334155;
+    }
+    
+    body.dark-mode .lang-option:hover {
+      background-color: #334155;
+    }
+    
+    body.dark-mode .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1a2845 100%);
+    }
+    
+    body.dark-mode section:nth-child(odd) {
+      background-color: #1e293b;
+    }
+    
+    body.dark-mode section:nth-child(even) {
+      background-color: #0f172a;
+    }
+    
+    body.dark-mode .section-label {
+      color: #4ade80;
+    }
+    
+    body.dark-mode .section-subtitle {
+      color: #94a3b8;
+    }
+    
+    body.dark-mode .mission-card {
+      background-color: #1e293b;
+      color: #cbd5e1;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    }
+    
+    body.dark-mode .mission-card h3 {
+      color: #f1f5f9;
+    }
+    
+    body.dark-mode .mission-card p {
+      color: #94a3b8;
+    }
+    
+    body.dark-mode .process-step {
+      background-color: rgba(16, 185, 129, 0.1);
+      border-left-color: #4ade80;
+      color: #cbd5e1;
+    }
+    
+    body.dark-mode .process-step h4 {
+      color: #f1f5f9;
+    }
+    
+    body.dark-mode .process-step p {
+      color: #94a3b8;
+    }
+    
+    body.dark-mode .field-group label {
+      color: #f1f5f9;
+    }
+    
+    body.dark-mode .field-group input,
+    body.dark-mode .field-group select,
+    body.dark-mode .field-group textarea {
+      background-color: #1e293b;
+      border-color: #334155;
+      color: #f1f5f9;
+    }
+    
+    body.dark-mode .field-group input:focus,
+    body.dark-mode .field-group select:focus,
+    body.dark-mode .field-group textarea:focus {
+      border-color: #4ade80;
+      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+    }
+    
+    body.dark-mode .footer {
+      background-color: #0f172a;
+      border-top: 1px solid #334155;
+    }
+    
+    body.dark-mode .footer-info,
+    body.dark-mode .footer-acli span {
+      color: #94a3b8;
+    }
+    
+    body.dark-mode .modal {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    body.dark-mode .modal-content {
+      background-color: #1e293b;
+      color: #f1f5f9;
+    }
+    
+    body.dark-mode .modal-close {
+      color: #94a3b8;
+    }
+    
+    body.dark-mode .modal-close:hover {
+      color: #f1f5f9;
+    }
   </style>
 </head>
 <body>
@@ -23,26 +156,26 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#" class="nav-brand">
-        <svg class="logo-econet-svg" width="40" height="40" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <!-- Green circle background -->
-          <circle cx="200" cy="200" r="195" fill="#10b981" opacity="0.9"/>
-          <!-- Leaf shape -->
-          <g transform="translate(200, 100)">
-            <path d="M 0 -60 Q -40 -30 -40 20 Q -30 60 0 80 Q 30 60 40 20 Q 40 -30 0 -60" fill="#ffffff" opacity="0.9"/>
-            <path d="M 0 -60 Q 0 0 0 80" stroke="#ffffff" stroke-width="4" fill="none"/>
-          </g>
-          <!-- Network nodes -->
-          <g>
-            <circle cx="120" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
-            <circle cx="200" cy="260" r="12" fill="#ffffff" opacity="0.8"/>
-            <circle cx="280" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
+        <svg class="logo-econet-svg" width="40" height="40" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+          <!-- Leaf and network icon -->
+          <g transform="translate(0, -20)">
+            <!-- Leaf -->
+            <path d="M 30 40 Q 20 50 20 70 Q 20 90 30 100 Q 40 90 40 70 Q 40 50 30 40" fill="#10b981" opacity="0.9"/>
+            <path d="M 30 40 Q 30 55 30 100" stroke="#10b981" stroke-width="2" fill="none"/>
+            <!-- Network nodes -->
+            <circle cx="50" cy="60" r="3" fill="#10b981"/>
+            <circle cx="70" cy="70" r="3" fill="#10b981"/>
+            <circle cx="60" cy="85" r="3" fill="#10b981"/>
+            <circle cx="75" cy="90" r="3" fill="#10b981"/>
             <!-- Connection lines -->
-            <line x1="140" y1="220" x2="180" y2="250" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
-            <line x1="220" y1="250" x2="260" y2="220" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
-            <line x1="120" y1="220" x2="280" y2="220" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+            <line x1="50" y1="60" x2="70" y2="70" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
+            <line x1="70" y1="70" x2="60" y2="85" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
+            <line x1="60" y1="85" x2="75" y2="90" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
           </g>
-          <!-- Text -->
-          <text x="200" y="340" font-size="32" font-weight="bold" text-anchor="middle" fill="#10b981" font-family="Arial, sans-serif">EcoNet</text>
+          <!-- ECONET Text -->
+          <text x="50" y="100" font-size="28" font-weight="900" text-anchor="start" font-family="Arial, sans-serif">
+            <tspan fill="#10b981">ECO</tspan><tspan fill="#14b8a6">NET</tspan>
+          </text>
         </svg>
       </a>
       <ul class="nav-links" id="navLinks">
@@ -73,21 +206,28 @@
     <div class="container">
       <div class="hero-visual">
         <div class="hero-visual-orb">
-          <svg class="logo-econet-svg" width="180" height="180" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="200" cy="200" r="195" fill="#ffffff" opacity="0.95"/>
-            <g transform="translate(200, 100)">
-              <path d="M 0 -60 Q -40 -30 -40 20 Q -30 60 0 80 Q 30 60 40 20 Q 40 -30 0 -60" fill="#10b981"/>
-              <path d="M 0 -60 Q 0 0 0 80" stroke="#10b981" stroke-width="4" fill="none"/>
-            </g>
+          <svg class="logo-econet-svg" width="280" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Leaf and network icon -->
             <g>
-              <circle cx="120" cy="220" r="12" fill="#10b981"/>
-              <circle cx="200" cy="260" r="12" fill="#10b981"/>
-              <circle cx="280" cy="220" r="12" fill="#10b981"/>
-              <line x1="140" y1="220" x2="180" y2="250" stroke="#10b981" stroke-width="3" opacity="0.7"/>
-              <line x1="220" y1="250" x2="260" y2="220" stroke="#10b981" stroke-width="3" opacity="0.7"/>
-              <line x1="120" y1="220" x2="280" y2="220" stroke="#10b981" stroke-width="2" opacity="0.5"/>
+              <!-- Leaf -->
+              <path d="M 80 40 Q 70 55 70 75 Q 70 95 80 110 Q 90 95 90 75 Q 90 55 80 40" fill="#10b981" opacity="0.95"/>
+              <path d="M 80 40 Q 80 60 80 110" stroke="#10b981" stroke-width="3" fill="none"/>
+              <!-- Network nodes -->
+              <circle cx="110" cy="50" r="5" fill="#10b981"/>
+              <circle cx="140" cy="65" r="5" fill="#10b981"/>
+              <circle cx="125" cy="85" r="5" fill="#10b981"/>
+              <circle cx="155" cy="95" r="5" fill="#10b981"/>
+              <!-- Connection lines -->
+              <line x1="110" y1="50" x2="140" y2="65" stroke="#10b981" stroke-width="2" opacity="0.7"/>
+              <line x1="140" y1="65" x2="125" y2="85" stroke="#10b981" stroke-width="2" opacity="0.7"/>
+              <line x1="125" y1="85" x2="155" y2="95" stroke="#10b981" stroke-width="2" opacity="0.7"/>
             </g>
-            <text x="200" y="340" font-size="32" font-weight="bold" text-anchor="middle" fill="#10b981" font-family="Arial, sans-serif">EcoNet</text>
+            <!-- ECONET Text -->
+            <text x="180" y="110" font-size="56" font-weight="900" font-family="Arial, sans-serif">
+              <tspan fill="#10b981">ECO</tspan><tspan fill="#14b8a6">NET</tspan>
+            </text>
+            <!-- Subtitle -->
+            <text x="180" y="145" font-size="20" font-weight="300" fill="#14b8a6" font-family="Arial, sans-serif">GREEN SOCIAL NETWORK</text>
           </svg>
         </div>
         <div class="floating-node">🤝</div>
@@ -133,19 +273,17 @@
   <section class="institutional-section" id="istituzionale">
     <div class="container text-center">
       <div class="acli-logo-banner reveal">
-        <svg class="logo-econet-svg" width="55" height="55" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="200" cy="200" r="195" fill="#10b981" opacity="0.9"/>
-          <g transform="translate(200, 100)">
-            <path d="M 0 -60 Q -40 -30 -40 20 Q -30 60 0 80 Q 30 60 40 20 Q 40 -30 0 -60" fill="#ffffff" opacity="0.9"/>
-            <path d="M 0 -60 Q 0 0 0 80" stroke="#ffffff" stroke-width="4" fill="none"/>
-          </g>
-          <g>
-            <circle cx="120" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
-            <circle cx="200" cy="260" r="12" fill="#ffffff" opacity="0.8"/>
-            <circle cx="280" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
-            <line x1="140" y1="220" x2="180" y2="250" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
-            <line x1="220" y1="250" x2="260" y2="220" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
-            <line x1="120" y1="220" x2="280" y2="220" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+        <svg class="logo-econet-svg" width="55" height="55" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(0, -20)">
+            <path d="M 30 40 Q 20 50 20 70 Q 20 90 30 100 Q 40 90 40 70 Q 40 50 30 40" fill="#10b981" opacity="0.9"/>
+            <path d="M 30 40 Q 30 55 30 100" stroke="#10b981" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="60" r="3" fill="#10b981"/>
+            <circle cx="70" cy="70" r="3" fill="#10b981"/>
+            <circle cx="60" cy="85" r="3" fill="#10b981"/>
+            <circle cx="75" cy="90" r="3" fill="#10b981"/>
+            <line x1="50" y1="60" x2="70" y2="70" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
+            <line x1="70" y1="70" x2="60" y2="85" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
+            <line x1="60" y1="85" x2="75" y2="90" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
           </g>
         </svg>
         <span style="font-size: 1.5rem; font-weight: 300;">✕</span>
@@ -383,20 +521,21 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <svg class="logo-econet-svg" width="50" height="50" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="200" cy="200" r="195" fill="#10b981" opacity="0.9"/>
-            <g transform="translate(200, 100)">
-              <path d="M 0 -60 Q -40 -30 -40 20 Q -30 60 0 80 Q 30 60 40 20 Q 40 -30 0 -60" fill="#ffffff" opacity="0.9"/>
-              <path d="M 0 -60 Q 0 0 0 80" stroke="#ffffff" stroke-width="4" fill="none"/>
+          <svg class="logo-econet-svg" width="50" height="50" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, -20)">
+              <path d="M 30 40 Q 20 50 20 70 Q 20 90 30 100 Q 40 90 40 70 Q 40 50 30 40" fill="#10b981" opacity="0.9"/>
+              <path d="M 30 40 Q 30 55 30 100" stroke="#10b981" stroke-width="2" fill="none"/>
+              <circle cx="50" cy="60" r="3" fill="#10b981"/>
+              <circle cx="70" cy="70" r="3" fill="#10b981"/>
+              <circle cx="60" cy="85" r="3" fill="#10b981"/>
+              <circle cx="75" cy="90" r="3" fill="#10b981"/>
+              <line x1="50" y1="60" x2="70" y2="70" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
+              <line x1="70" y1="70" x2="60" y2="85" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
+              <line x1="60" y1="85" x2="75" y2="90" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
             </g>
-            <g>
-              <circle cx="120" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
-              <circle cx="200" cy="260" r="12" fill="#ffffff" opacity="0.8"/>
-              <circle cx="280" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
-              <line x1="140" y1="220" x2="180" y2="250" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
-              <line x1="220" y1="250" x2="260" y2="220" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
-              <line x1="120" y1="220" x2="280" y2="220" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
-            </g>
+            <text x="50" y="100" font-size="24" font-weight="900" text-anchor="start" font-family="Arial, sans-serif">
+              <tspan fill="#10b981">ECO</tspan><tspan fill="#14b8a6">NET</tspan>
+            </text>
           </svg>
         </div>
         <div class="footer-info">

@@ -6,10 +6,16 @@ const appState = {
   hasSubscription: false,
   currentPage: 'home',
   mobileMenuOpen: false,
+  darkMode: true,
 };
 
 // ========== INITIALIZATION ==========
 document.addEventListener('DOMContentLoaded', () => {
+  // Enable dark mode by default
+  if (appState.darkMode) {
+    document.body.classList.add('dark-mode');
+  }
+  
   initializeLanguageSelector();
   initializeFormHandling();
   initializeScrollAnimations();
