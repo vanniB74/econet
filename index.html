@@ -8,13 +8,42 @@
   <meta name="keywords" content="EcoNet, cooperativa sociale, km 0, caporalato, inclusione sociale, agricoltura etica, ACLI, Ceglie del Campo" />
   <link rel="stylesheet" href="styles.css" />
   <script src="translations.js"></script>
+  <style>
+    /* ========== EMBEDDED SVG LOGOS ========== */
+    .logo-econet-svg,
+    .logo-acli-svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
   <!-- ========== NAVBAR ========== -->
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#" class="nav-brand">
-        <img src="logo-econet.jpg" alt="EcoNet Logo" class="nav-brand-logo" />
+        <svg class="logo-econet-svg" width="40" height="40" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Green circle background -->
+          <circle cx="200" cy="200" r="195" fill="#10b981" opacity="0.9"/>
+          <!-- Leaf shape -->
+          <g transform="translate(200, 100)">
+            <path d="M 0 -60 Q -40 -30 -40 20 Q -30 60 0 80 Q 30 60 40 20 Q 40 -30 0 -60" fill="#ffffff" opacity="0.9"/>
+            <path d="M 0 -60 Q 0 0 0 80" stroke="#ffffff" stroke-width="4" fill="none"/>
+          </g>
+          <!-- Network nodes -->
+          <g>
+            <circle cx="120" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
+            <circle cx="200" cy="260" r="12" fill="#ffffff" opacity="0.8"/>
+            <circle cx="280" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
+            <!-- Connection lines -->
+            <line x1="140" y1="220" x2="180" y2="250" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
+            <line x1="220" y1="250" x2="260" y2="220" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
+            <line x1="120" y1="220" x2="280" y2="220" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+          </g>
+          <!-- Text -->
+          <text x="200" y="340" font-size="32" font-weight="bold" text-anchor="middle" fill="#10b981" font-family="Arial, sans-serif">EcoNet</text>
+        </svg>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#missione" data-i18n="nav_mission">Missione</a></li>
@@ -44,7 +73,22 @@
     <div class="container">
       <div class="hero-visual">
         <div class="hero-visual-orb">
-          <img src="logo-econet.jpg" alt="EcoNet" class="hero-logo-img" />
+          <svg class="logo-econet-svg" width="180" height="180" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="200" r="195" fill="#ffffff" opacity="0.95"/>
+            <g transform="translate(200, 100)">
+              <path d="M 0 -60 Q -40 -30 -40 20 Q -30 60 0 80 Q 30 60 40 20 Q 40 -30 0 -60" fill="#10b981"/>
+              <path d="M 0 -60 Q 0 0 0 80" stroke="#10b981" stroke-width="4" fill="none"/>
+            </g>
+            <g>
+              <circle cx="120" cy="220" r="12" fill="#10b981"/>
+              <circle cx="200" cy="260" r="12" fill="#10b981"/>
+              <circle cx="280" cy="220" r="12" fill="#10b981"/>
+              <line x1="140" y1="220" x2="180" y2="250" stroke="#10b981" stroke-width="3" opacity="0.7"/>
+              <line x1="220" y1="250" x2="260" y2="220" stroke="#10b981" stroke-width="3" opacity="0.7"/>
+              <line x1="120" y1="220" x2="280" y2="220" stroke="#10b981" stroke-width="2" opacity="0.5"/>
+            </g>
+            <text x="200" y="340" font-size="32" font-weight="bold" text-anchor="middle" fill="#10b981" font-family="Arial, sans-serif">EcoNet</text>
+          </svg>
         </div>
         <div class="floating-node">🤝</div>
         <div class="floating-node">🌾</div>
@@ -89,9 +133,28 @@
   <section class="institutional-section" id="istituzionale">
     <div class="container text-center">
       <div class="acli-logo-banner reveal">
-        <img src="logo-econet.jpg" alt="EcoNet" style="height: 55px;" />
+        <svg class="logo-econet-svg" width="55" height="55" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="200" r="195" fill="#10b981" opacity="0.9"/>
+          <g transform="translate(200, 100)">
+            <path d="M 0 -60 Q -40 -30 -40 20 Q -30 60 0 80 Q 30 60 40 20 Q 40 -30 0 -60" fill="#ffffff" opacity="0.9"/>
+            <path d="M 0 -60 Q 0 0 0 80" stroke="#ffffff" stroke-width="4" fill="none"/>
+          </g>
+          <g>
+            <circle cx="120" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
+            <circle cx="200" cy="260" r="12" fill="#ffffff" opacity="0.8"/>
+            <circle cx="280" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
+            <line x1="140" y1="220" x2="180" y2="250" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
+            <line x1="220" y1="250" x2="260" y2="220" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
+            <line x1="120" y1="220" x2="280" y2="220" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+          </g>
+        </svg>
         <span style="font-size: 1.5rem; font-weight: 300;">✕</span>
-        <img src="logo-acli.jpg" alt="A.C.L.I. Logo" />
+        <svg class="logo-econet-svg" width="55" height="55" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- A.C.L.I. Logo - stylized letters -->
+          <circle cx="200" cy="200" r="195" fill="#1f2937" opacity="0.9"/>
+          <text x="200" y="280" font-size="120" font-weight="bold" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif">A</text>
+          <text x="200" y="380" font-size="60" font-weight="normal" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif">ACLI</text>
+        </svg>
       </div>
       <div class="section-label reveal" data-i18n="inst_label"><span class="icon">🏛️</span> Rete Istituzionale & Patrocinio</div>
       <h2 class="section-title reveal reveal-delay-1">
@@ -308,13 +371,31 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="logo-econet.jpg" alt="EcoNet" class="footer-logo" />
+          <svg class="logo-econet-svg" width="50" height="50" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="200" r="195" fill="#10b981" opacity="0.9"/>
+            <g transform="translate(200, 100)">
+              <path d="M 0 -60 Q -40 -30 -40 20 Q -30 60 0 80 Q 30 60 40 20 Q 40 -30 0 -60" fill="#ffffff" opacity="0.9"/>
+              <path d="M 0 -60 Q 0 0 0 80" stroke="#ffffff" stroke-width="4" fill="none"/>
+            </g>
+            <g>
+              <circle cx="120" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
+              <circle cx="200" cy="260" r="12" fill="#ffffff" opacity="0.8"/>
+              <circle cx="280" cy="220" r="12" fill="#ffffff" opacity="0.8"/>
+              <line x1="140" y1="220" x2="180" y2="250" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
+              <line x1="220" y1="250" x2="260" y2="220" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
+              <line x1="120" y1="220" x2="280" y2="220" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+            </g>
+          </svg>
         </div>
         <div class="footer-info">
           Cooperativa Sociale • Direzione: Dott. Giovanni Giovanelli Luigi • © 2026
         </div>
         <div class="footer-acli">
-          <img src="logo-acli.jpg" alt="A.C.L.I." />
+          <svg class="logo-econet-svg" width="50" height="50" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="200" r="195" fill="#1f2937" opacity="0.9"/>
+            <text x="200" y="280" font-size="120" font-weight="bold" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif">A</text>
+            <text x="200" y="380" font-size="60" font-weight="normal" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif">ACLI</text>
+          </svg>
           <span>A.C.L.I. — Sezione Ceglie del Campo (Bari)</span>
         </div>
       </div>
