@@ -1,1006 +1,326 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoNet Hub · Brand Symphony</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'eco-black': '#050505',
-                        'eco-lime': '#84C016',
-                        'eco-gray': '#111111',
-                        'eco-card': '#0a0a0a',
-                        'eco-border': '#1a1a1a'
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'serif'],
-                        'sans': ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body{background:#050505;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
-        .font-partitura{font-family:'Playfair Display',serif}
-        .pentagramma{background-image:repeating-linear-gradient(to bottom,transparent,transparent 9px,rgba(132,192,22,.05) 10px);background-size:100% 10px}
-        ::-webkit-scrollbar{width:6px}
-        ::-webkit-scrollbar-track{background:#050505}
-        ::-webkit-scrollbar-thumb{background:#84C016;border-radius:3px}
-        .page-container{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;pointer-events:none;position:absolute;width:100%;top:0;left:0}
-        .page-active{opacity:1;transform:translateY(0);pointer-events:auto;position:relative}
-        .accordion-content{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
-        .accordion-open{max-height:4000px}
-        .img-zoom{cursor:zoom-in;transition:transform .4s ease}
-        .img-zoom:hover{transform:scale(1.03)}
-        #image-modal img{transition:transform .3s ease-out}
-        .nav-link{position:relative}
-        .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#84C016;transition:width .3s ease}
-        .nav-link:hover::after,.nav-link.active::after{width:100%}
-        .glow-lime{box-shadow:0 0 30px rgba(132,192,22,.15),0 0 60px rgba(132,192,22,.05)}
-        .glow-lime-strong{box-shadow:0 0 40px rgba(132,192,22,.25),0 0 80px rgba(132,192,22,.1)}
-        .float-anim{animation:floatY 6s ease-in-out infinite}
-        @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-        .pulse-ring{animation:pulseRing 2s ease-out infinite}
-        @keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(132,192,22,.4)}70%{box-shadow:0 0 0 20px rgba(132,192,22,0)}100%{box-shadow:0 0 0 0 rgba(132,192,22,0)}}
-        .fade-in-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
-        .fade-in-up.visible{opacity:1;transform:translateY(0)}
-        .slide-left{opacity:0;transform:translateX(-40px);transition:opacity .6s ease,transform .6s ease}
-        .slide-left.visible{opacity:1;transform:translateX(0)}
-        .slide-right{opacity:0;transform:translateX(40px);transition:opacity .6s ease,transform .6s ease}
-        .slide-right.visible{opacity:1;transform:translateX(0)}
-        .hero-bg{position:relative;overflow:hidden}
-        .hero-bg::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 50%,rgba(132,192,22,.06) 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(132,192,22,.04) 0%,transparent 50%);animation:bgShift 15s ease-in-out infinite alternate}
-        @keyframes bgShift{0%{transform:translate(0,0) rotate(0deg)}100%{transform:translate(-5%,3%) rotate(2deg)}}
-        .card-hover{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
-        .card-hover:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(132,192,22,.1);border-color:rgba(132,192,22,.3)}
-        .kpi-bar{transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-        .toast{transform:translateY(100px);opacity:0;transition:all .4s ease}
-        .toast.show{transform:translateY(0);opacity:1}
-        .lang-btn{transition:all .2s ease}
-        .lang-btn.active{background:#84C016;color:#050505}
-        .mobile-menu{transform:translateX(100%);transition:transform .3s ease}
-        .mobile-menu.open{transform:translateX(0)}
-        .parallax-layer{transition:transform .1s linear}
-        @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0s!important}}
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoNet – Green Social Network | Cooperativa Sociale</title>
+  <meta name="description" content="EcoNet è una cooperativa sociale affiliata A.C.L.I. Ceglie del Campo. Rete cooperativa territoriale per agricoltura etica, inclusione sociale, km 0 reale e contrasto al caporalato." />
+  <meta name="keywords" content="EcoNet, cooperativa sociale, km 0, caporalato, inclusione sociale, agricoltura etica, ACLI, Ceglie del Campo" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="translations.js"></script>
 </head>
-<body class="antialiased">
-
-<script>
-let appState = {
-    isLoggedIn: false,
-    userName: 'Mario Rossi',
-    hasSubscription: true,
-    currentLang: localStorage.getItem('econet-lang') || 'en',
-    currentPage: 'home',
-    mobileMenuOpen: false
-};
-
-const T = {
-en:{nav_home:"Home",nav_overture:"I. Overture",nav_dev:"II. Dev",nav_botanical:"Botanical",nav_team:"Team",nav_gallery:"Gallery",nav_climax:"III. Climax",btn_sign_in:"Sign In",btn_dashboard:"Dashboard",home_aci:"A.C.L.I. — Sex. Ceglie del Campo",home_title:'Brand <span class="text-eco-lime">Symphony</span>',home_sub:"Harmonic Marketing Method for the EcoNet Social Cooperative. A three-movement narrative for harmonic brand building.",home_m1_title:"Overture",home_m1_desc:"Reveal the territory, present EcoNet's ethical mission and anchor the founding values.",home_m2_title:"Development",home_m2_desc:"Build inter-cooperative relationships and B2B/B2C trust through shared supply chain.",home_m3_title:"Climax",home_m3_desc:"Consolidate emotional loyalty and brand identity within the local community.",ouv_title:"Overture",ouv_sub:"The Score — Mission & Founding Values",ouv_mission_title:"La Partitura",ouv_mission_text:"Create a virtuous inter-cooperative network for the valorization of the territory, the social redemption of agricultural labor, and food and botanical education.",val1_h:"Legality",val1_p:"Fight against labor exploitation and transparent recruitment.",val2_h:"True Zero KM",val2_p:"Short supply chain with zero transport impact.",val3_h:"Sustainability",val3_p:"Ecology, biodiversity and regenerative farming.",val4_h:"Social Cohesion",val4_p:"Community integration and labor inclusion.",dev_title:"Development",dev_sub:"Building inter-cooperative relationships and B2B/B2C trust",p1_h:"Land Recovery & KM 0",p1_p:"Identify and recover abandoned agricultural land within the Ceglie del Campo area.",p1_icon:"fa-seedling",p2_h:"Real Estate, Infra & Training",p2_p:"Acquire or lease farm structures and storage facilities.",p2_icon:"fa-warehouse",p3_h:"Social Impact & Dignity",p3_p:"Provide stable, legal employment to marginalized agricultural workers.",p3_icon:"fa-hand-holding-heart",p4_h:"Production Chain & B2B/B2C",p4_p:"Develop processing facilities for value-added products.",p4_icon:"fa-link",p5_h:"Apiculture: Pollination & Honey",p5_p:"Install apiaries across recovered lands.",p5_icon:"fa-bug",p6_h:"Educational Hub & Botanical Path",p6_p:"Design a botanical trail through cultivated and wild areas.",p6_icon:"fa-graduation-cap",herbs_title:"Wild Herbs",herbs_sub:"Wild Herbs of the «Ceglie del Campo» Territory",herb1_name:"Wild Fennel",herb1_sci:"Foeniculum vulgare",herb1_desc:"Aromatic perennial found along field edges.",herb2_name:"Mallow",herb2_sci:"Malva sylvestris",herb2_desc:"Soft-leaved biennial common in disturbed soils.",herb3_name:"Wild Asparagus",herb3_sci:"Asparagus acutifolius",herb3_desc:"Prized spring shoot growing in dry stone walls.",herb4_name:"Purslane",herb4_sci:"Portulaca oleracea",herb4_desc:"Prostrate succulent annual rich in Omega-3.",herb5_name:"Dandelion",herb5_sci:"Taraxacum officinale",herb5_desc:"Ubiquitous perennial with bright yellow flowers.",herb6_name:"Borage",herb6_sci:"Borago officinalis",herb6_desc:"Hairy annual with star-shaped blue flowers.",team_title:"Leadership Team",team_sub:"Four sections of the EcoNet symphony",t1_name:"Antonio De Carlo",t1_role:"Project Developer",t1_desc:"Strategic planner with 15 years in cooperative development.",t2_name:"Francesca Lipardi",t2_role:"General Direction",t2_desc:"Operational leader overseeing all cooperative activities.",t3_name:"Marco Ferrante",t3_role:"Real Estate & Lands",t3_desc:"Expert in agricultural land recovery.",t4_name:"Lucia Greco",t4_role:"Public Green & Botany",t4_desc:"Botanist and environmental educator.",climax_title:"Climax",climax_sub:"KPI Matrix & Crescendo Vision",kpi1:"Hectares Recovered",kpi1v:"12",kpi1t:"Target: 50 ha by 2027",kpi2:"Active Workers",kpi2v:"28",kpi2t:"Target: 120 by 2027",kpi3:"B2B Partners",kpi3v:"15",kpi3t:"Target: 60 by 2027",kpi4:"Community Events",kpi4v:"34",kpi4t:"Target: 100/year",kpi5:"Honey Production",kpi5v:"800 kg",kpi5t:"Target: 3,000 kg",kpi6:"Botanical Species",kpi6v:"45",kpi6t:"Target: 150 by 2027",crescendo_title:"Crescendo Vision",crescendo_text:"EcoNet aspires to become a reference model for social-agricultural cooperatives.",dash_title:"Dashboard",dash_sub:"Active",dash_cancel:"Cancel",dash_reactivate:"Reactivate",dash_signout:"Sign Out",modal_signin_title:"Sign In",modal_access:"Access Hub",modal_email:"Email",modal_pass:"Password",modal_remember:"Remember me",modal_forgot:"Forgot password?",foot_dev:"Project Developer",foot_dir:"General Direction",foot_re:"Real Estate",foot_green:"Public Green",foot_rights:"All rights reserved.",foot_privacy:"Privacy Policy",foot_terms:"Terms",foot_cookies:"Cookies",toast_welcome:"Welcome!",toast_sub_cancel:"Cancelled.",toast_sub_react:"Reactivated.",toast_signout:"Signed out.",toast_lang:"Language changed.",gallery_cap1:"Field",gallery_cap2:"Fennel",gallery_cap3:"Apiary",gallery_cap4:"Path",gallery_cap5:"Harvest",gallery_cap6:"Workshop"},
-it:{nav_home:"Home",nav_overture:"I. Overtura",nav_dev:"II. Sviluppo",nav_botanical:"Botanica",nav_team:"Team",nav_gallery:"Galleria",nav_climax:"III. Climax",btn_sign_in:"Accedi",btn_dashboard:"Dashboard",home_aci:"A.C.L.I.",home_title:'Brand <span class="text-eco-lime">Symphony</span>',home_sub:"Metodo di Marketing Armonico per EcoNet.",home_m1_title:"Overtura",home_m1_desc:"Svelare il territorio.",home_m2_title:"Sviluppo",home_m2_desc:"Costruire relazioni inter-cooperative.",home_m3_title:"Climax",home_m3_desc:"Consolidare la fedeltà emotiva.",ouv_title:"Overtura",ouv_sub:"La Partitura",ouv_mission_title:"La Partitura",ouv_mission_text:"Creare una rete virtuosa inter-cooperativa.",val1_h:"Legalità",val1_p:"Contrasto al caporalato.",val2_h:"KM 0 Reale",val2_p:"Filiera corta.",val3_h:"Sostenibilità",val3_p:"Ecologia e biodiversità.",val4_h:"Coesione Sociale",val4_p:"Integrazione comunitaria.",dev_title:"Sviluppo",dev_sub:"Costruire relazioni",p1_h:"Recupero Terreni",p1_p:"Identificare e recuperare terreni.",p1_icon:"fa-seedling",p2_h:"Infrastrutture",p2_p:"Costruire hub logistici.",p2_icon:"fa-warehouse",p3_h:"Impatto Sociale",p3_p:"Offrire impiego stabile.",p3_icon:"fa-hand-holding-heart",p4_h:"Filiera Produttiva",p4_p:"Sviluppare strutture.",p4_icon:"fa-link",p5_h:"Apicoltura",p5_p:"Installare apiari.",p5_icon:"fa-bug",p6_h:"Hub Educativo",p6_p:"Progettare percorso botanico.",p6_icon:"fa-graduation-cap",herbs_title:"Erbe Spontanee",herbs_sub:"Erbe del territorio",herb1_name:"Finocchio",herb1_sci:"Foeniculum",herb1_desc:"Perenne aromatica.",herb2_name:"Malva",herb2_sci:"Malva sylvestris",herb2_desc:"Biennale.",herb3_name:"Asparago",herb3_sci:"Asparagus",herb3_desc:"Germoglio.",herb4_name:"Portulaca",herb4_sci:"Portulaca",herb4_desc:"Succulenta.",herb5_name:"Tarassaco",herb5_sci:"Taraxacum",herb5_desc:"Perenne.",herb6_name:"Borragine",herb6_sci:"Borago",herb6_desc:"Annuale.",team_title:"Team",team_sub:"Quattro sezioni",t1_name:"Antonio",t1_role:"Sviluppatore",t1_desc:"Progettista strategico.",t2_name:"Francesca",t2_role:"Direzione",t2_desc:"Leader operativa.",t3_name:"Marco",t3_role:"Immobiliare",t3_desc:"Esperto terreni.",t4_name:"Lucia",t4_role:"Botanica",t4_desc:"Botanica.",climax_title:"Climax",climax_sub:"Matrice KPI",kpi1:"Ettari",kpi1v:"12",kpi1t:"Obiettivo: 50",kpi2:"Lavoratori",kpi2v:"28",kpi2t:"Obiettivo: 120",kpi3:"Partner",kpi3v:"15",kpi3t:"Obiettivo: 60",kpi4:"Eventi",kpi4v:"34",kpi4t:"Obiettivo: 100",kpi5:"Miele",kpi5v:"800 kg",kpi5t:"Obiettivo: 3000",kpi6:"Specie",kpi6v:"45",kpi6t:"Obiettivo: 150",crescendo_title:"Visione",crescendo_text:"EcoNet aspira.",dash_title:"Dashboard",dash_sub:"Attivo",dash_cancel:"Annulla",dash_reactivate:"Riattiva",dash_signout:"Esci",modal_signin_title:"Accedi",modal_access:"Accedi",modal_email:"Email",modal_pass:"Password",modal_remember:"Ricordami",modal_forgot:"Dimenticata?",foot_dev:"Sviluppatore",foot_dir:"Direzione",foot_re:"Immobiliare",foot_green:"Botanica",foot_rights:"Diritti riservati.",foot_privacy:"Privacy",foot_terms:"Termini",foot_cookies:"Cookie",toast_welcome:"Bentornato!",toast_sub_cancel:"Annullato.",toast_sub_react:"Riattivato.",toast_signout:"Disconnesso.",toast_lang:"Lingua.",gallery_cap1:"Campo",gallery_cap2:"Finocchio",gallery_cap3:"Apiario",gallery_cap4:"Percorso",gallery_cap5:"Raccolta",gallery_cap6:"Workshop"},
-fr:{nav_home:"Accueil",nav_overture:"I. Ouverture",nav_dev:"II. Dév.",nav_botanical:"Botanique",nav_team:"Équipe",nav_gallery:"Galerie",nav_climax:"III. Apogée",btn_sign_in:"Connexion",btn_dashboard:"Dashboard"},
-de:{nav_home:"Start",nav_overture:"I. Ouvertüre",nav_dev:"II. Entw.",nav_botanical:"Botanik",nav_team:"Team",nav_gallery:"Galerie",nav_climax:"III. Höhepunkt"}
-};
-
-function t(key){return T[appState.currentLang][key]||T['en'][key]||key}
-function navigateTo(page){appState.currentPage=page;document.querySelectorAll('.page-container').forEach(p=>p.classList.remove('page-active'));const target=document.getElementById('page-'+page);if(target){setTimeout(()=>target.classList.add('page-active'),30)}window.scrollTo({top:0,behavior:'smooth'});closeMobileMenu();}
-function setLang(lang){appState.currentLang=lang;localStorage.setItem('econet-lang',lang);renderAll();}
-function showToast(msg,icon='fa-check'){const el=document.getElementById('toast');el.innerHTML=`<i class="fa-solid ${icon} mr-2"></i>${msg}`;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3000);}
-function openModal(id){document.getElementById(id).classList.remove('hidden');document.body.style.overflow='hidden'}
-function closeModal(id){document.getElementById(id).classList.add('hidden');document.body.style.overflow=''}
-function toggleMobileMenu(){appState.mobileMenuOpen=!appState.mobileMenuOpen;document.getElementById('mobile-menu').classList.toggle('open',appState.mobileMenuOpen);}
-function closeMobileMenu(){appState.mobileMenuOpen=false;document.getElementById('mobile-menu').classList.remove('open')}
-function handleSignIn(e){e.preventDefault();appState.isLoggedIn=true;closeModal('signin-modal');renderAll();showToast(t('toast_welcome'),'fa-user-check');}
-function handleSignOut(){appState.isLoggedIn=false;appState.hasSubscription=true;renderAll();navigateTo('home');showToast(t('toast_signout'),'fa-right-from-bracket');}
-function toggleSubscription(){appState.hasSubscription=!appState.hasSubscription;renderAll();showToast(appState.hasSubscription?t('toast_sub_react'):t('toast_sub_cancel'),'fa-credit-card');}
-
-function renderNav(){return `<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-eco-black/80 border-b border-white/5"><div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between"><a href="#" onclick="navigateTo('home');return false" class="font-partitura font-bold text-lg">EcoNet</a><div class="hidden lg:flex items-center gap-8">${['home','overture','dev','botanical','team','gallery','climax'].map(p=>`<a href="#" class="text-xs font-semibold uppercase ${appState.currentPage===p?'text-eco-lime':'text-neutral-400'}" onclick="navigateTo('${p}');return false">${t('nav_'+p)}</a>`).join('')}</div><div class="flex items-center gap-3">${appState.isLoggedIn?`<button onclick="handleSignOut()" class="bg-eco-lime text-eco-black px-5 py-2 rounded-full text-xs font-bold">${t('btn_dashboard')}</button>`:`<button onclick="openModal('signin-modal')" class="border border-eco-lime/40 text-eco-lime px-5 py-2 rounded-full text-xs font-bold">${t('btn_sign_in')}</button>`}</div></div></nav><div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-80 h-full z-[60] bg-eco-black/95 p-8 pt-24"></div>`;}
-
-function renderHome(){return `<section class="min-h-screen flex items-center justify-center pt-20"><div class="max-w-4xl mx-auto px-6 text-center"><h1 class="font-partitura text-7xl font-black mb-8">${t('home_title')}</h1><p class="text-lg text-neutral-400 mb-16">${t('home_sub')}</p><button onclick="navigateTo('overture')" class="bg-eco-lime text-eco-black px-8 py-4 rounded-full font-bold">Begin</button></div></section>`;}
-
-function renderOverture(){return `<section class="min-h-screen pt-32"><div class="max-w-6xl mx-auto px-6"><h2 class="font-partitura text-6xl font-black mb-8">${t('ouv_title')}</h2><div class="bg-eco-card border border-eco-border rounded-2xl p-10"><h3 class="text-2xl font-bold mb-4">${t('ouv_mission_title')}</h3><p>${t('ouv_mission_text')}</p></div></div></section>`;}
-
-function renderDev(){return `<section class="min-h-screen pt-32"><div class="max-w-6xl mx-auto px-6"><h2 class="font-partitura text-6xl font-black mb-16">${t('dev_title')}</h2></div></section>`;}
-
-function renderBotanical(){return `<section class="min-h-screen pt-32"><div class="max-w-6xl mx-auto px-6"><h2 class="font-partitura text-6xl font-black mb-16">${t('herbs_title')}</h2><div class="grid grid-cols-3 gap-6">${[1,2,3,4,5,6].map(i=>`<div class="bg-eco-card rounded-2xl p-6"><p class="text-eco-lime">${t('herb'+i+'_name')}</p></div>`).join('')}</div></div></section>`;}
-
-function renderTeam(){return `<section class="min-h-screen pt-32"><div class="max-w-6xl mx-auto px-6"><h2 class="font-partitura text-6xl font-black mb-16">${t('team_title')}</h2></div></section>`;}
-
-function renderGallery(){return `<section class="min-h-screen pt-32"><div class="max-w-6xl mx-auto px-6"><h2 class="font-partitura text-6xl font-black">Gallery</h2></div></section>`;}
-
-function renderClimax(){return `<section class="min-h-screen pt-32"><div class="max-w-6xl mx-auto px-6"><h2 class="font-partitura text-6xl font-black mb-16">${t('climax_title')}</h2></div></section>`;}
-
-function renderDashboard(){return `<section class="min-h-screen pt-32"><div class="max-w-6xl mx-auto px-6"><h2 class="font-partitura text-6xl font-black">${t('dash_title')}</h2></div></section>`;}
-
-function renderFooter(){return `<footer class="border-t border-white/5 py-16"><div class="max-w-6xl mx-auto px-6"><p class="text-sm text-neutral-600">© 2026 EcoNet — ${t('foot_rights')}</p></div></footer>`;}
-
-function renderAll(){
-    document.getElementById('nav-container').innerHTML=renderNav();
-    document.getElementById('home-content').innerHTML=renderHome();
-    document.getElementById('overture-content').innerHTML=renderOverture();
-    document.getElementById('dev-content').innerHTML=renderDev();
-    document.getElementById('botanical-content').innerHTML=renderBotanical();
-    document.getElementById('team-content').innerHTML=renderTeam();
-    document.getElementById('gallery-content').innerHTML=renderGallery();
-    document.getElementById('climax-content').innerHTML=renderClimax();
-    document.getElementById('dashboard-content').innerHTML=renderDashboard();
-    document.getElementById('footer-container').innerHTML=renderFooter();
-    document.querySelectorAll('.page-container').forEach(p=>p.classList.remove('page-active'));
-    const cur=document.getElementById('page-'+appState.currentPage);
-    if(cur)cur.classList.add('page-active');
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-    renderAll();
-    document.getElementById('page-home').classList.add('page-active');
-    document.querySelectorAll('.modal-backdrop').forEach(m=>{
-        m.addEventListener('click',(e)=>{if(e.target===m){m.classList.add('hidden');document.body.style.overflow=''}});
-    });
-    document.addEventListener('keydown',(e)=>{
-        if(e.key==='Escape'){
-            document.querySelectorAll('.modal-backdrop:not(.hidden)').forEach(m=>{m.classList.add('hidden');document.body.style.overflow=''});
-            closeMobileMenu();
-        }
-    });
-});
-</script>
-
-<div id="nav-container"></div>
-
-<main class="relative" style="min-height:100vh">
-    <div id="page-home" class="page-container"><div id="home-content"></div></div>
-    <div id="page-overture" class="page-container"><div id="overture-content"></div></div>
-    <div id="page-dev" class="page-container"><div id="dev-content"></div></div>
-    <div id="page-botanical" class="page-container"><div id="botanical-content"></div></div>
-    <div id="page-team" class="page-container"><div id="team-content"></div></div>
-    <div id="page-gallery" class="page-container"><div id="gallery-content"></div></div>
-    <div id="page-climax" class="page-container"><div id="climax-content"></div></div>
-    <div id="page-dashboard" class="page-container"><div id="dashboard-content"></div></div>
-</main>
-
-<div id="footer-container"></div>
-
-<div id="signin-modal" class="modal-backdrop hidden fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
-    <div class="bg-eco-gray border border-eco-border rounded-2xl p-10 w-full max-w-md">
-        <button onclick="closeModal('signin-modal')" class="absolute top-4 right-4 w-8 h-8 text-neutral-500">✕</button>
-        <h3 class="font-partitura text-2xl font-bold mb-8">Sign In</h3>
-        <form onsubmit="handleSignIn(event)" class="space-y-5">
-            <div>
-                <label for="email" class="block text-xs text-neutral-500 uppercase mb-2">Email</label>
-                <input type="email" id="email" required placeholder="mario@econet.coop" class="w-full bg-eco-black border border-eco-border rounded-xl px-5 py-3 text-sm text-white focus:outline-none focus:border-eco-lime">
-            </div>
-            <div>
-                <label for="password" class="block text-xs text-neutral-500 uppercase mb-2">Password</label>
-                <input type="password" id="password" required placeholder="••••••••" class="w-full bg-eco-black border border-eco-border rounded-xl px-5 py-3 text-sm text-white focus:outline-none focus:border-eco-lime">
-            </div>
-            <button type="submit" class="w-full bg-eco-lime text-eco-black py-3 rounded-xl text-sm font-bold uppercase">Access Hub</button>
-        </form>
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-brand">
+        <img src="logo-econet.jpg" alt="EcoNet Logo" class="nav-brand-logo" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#missione" data-i18n="nav_mission">Missione</a></li>
+        <li><a href="#istituzionale" data-i18n="nav_inst">Rete A.C.L.I.</a></li>
+        <li><a href="#agricoltura" data-i18n="nav_agriculture">Agricoltura</a></li>
+        <li><a href="#sociale" data-i18n="nav_social">Sociale</a></li>
+        <li><a href="#filiera" data-i18n="nav_supply">Filiera</a></li>
+        <li><a href="#kpi" data-i18n="nav_kpi">KPI</a></li>
+        <li><a href="#calcolatore" data-i18n="nav_calc">Calcolatore</a></li>
+        <li><a href="#prenotazione" data-i18n="nav_booking">Prenotazioni</a></li>
+        <li><a href="#" class="btn btn-pdf js-download-pdf" data-i18n="nav_pdf">📄 Scarica PDF</a></li>
+      </ul>
+      <!-- Language Selector -->
+      <div class="lang-switcher-container">
+        <button class="lang-btn" id="langToggleBtn" aria-label="Cambia lingua">
+          <span id="currentLangFlag">🇮🇹</span>
+          <span id="currentLangCode">IT</span>
+          <span style="font-size: 0.7rem;">▼</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown"></div>
+      </div>
     </div>
-</div>
+  </nav>
 
-<div id="toast" class="toast fixed bottom-8 left-1/2 -translate-x-1/2 z-[80] bg-eco-gray border border-eco-border rounded-xl px-6 py-4 text-sm font-medium"></div>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoNet Hub · Brand Symphony</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'eco-black': '#050505',
-                        'eco-lime': '#84C016',
-                        'eco-gray': '#111111',
-                        'eco-card': '#0a0a0a',
-                        'eco-border': '#1a1a1a'
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'serif'],
-                        'sans': ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body{background:#050505;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
-        .font-partitura{font-family:'Playfair Display',serif}
-        .pentagramma{background-image:repeating-linear-gradient(to bottom,transparent,transparent 9px,rgba(132,192,22,.05) 10px);background-size:100% 10px}
-        ::-webkit-scrollbar{width:6px}
-        ::-webkit-scrollbar-track{background:#050505}
-        ::-webkit-scrollbar-thumb{background:#84C016;border-radius:3px}
-        .page-container{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;pointer-events:none;position:absolute;width:100%;top:0;left:0}
-        .page-active{opacity:1;transform:translateY(0);pointer-events:auto;position:relative}
-        .accordion-content{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
-        .accordion-open{max-height:4000px}
-        .img-zoom{cursor:zoom-in;transition:transform .4s ease}
-        .img-zoom:hover{transform:scale(1.03)}
-        #image-modal img{transition:transform .3s ease-out}
-        .nav-link{position:relative}
-        .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#84C016;transition:width .3s ease}
-        .nav-link:hover::after,.nav-link.active::after{width:100%}
-        .glow-lime{box-shadow:0 0 30px rgba(132,192,22,.15),0 0 60px rgba(132,192,22,.05)}
-        .glow-lime-strong{box-shadow:0 0 40px rgba(132,192,22,.25),0 0 80px rgba(132,192,22,.1)}
-        .float-anim{animation:floatY 6s ease-in-out infinite}
-        @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-        .pulse-ring{animation:pulseRing 2s ease-out infinite}
-        @keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(132,192,22,.4)}70%{box-shadow:0 0 0 20px rgba(132,192,22,0)}100%{box-shadow:0 0 0 0 rgba(132,192,22,0)}}
-        .fade-in-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
-        .fade-in-up.visible{opacity:1;transform:translateY(0)}
-        .slide-left{opacity:0;transform:translateX(-40px);transition:opacity .6s ease,transform .6s ease}
-        .slide-left.visible{opacity:1;transform:translateX(0)}
-        .slide-right{opacity:0;transform:translateX(40px);transition:opacity .6s ease,transform .6s ease}
-        .slide-right.visible{opacity:1;transform:translateX(0)}
-        .hero-bg{position:relative;overflow:hidden}
-        .hero-bg::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 50%,rgba(132,192,22,.06) 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(132,192,22,.04) 0%,transparent 50%);animation:bgShift 15s ease-in-out infinite alternate}
-        @keyframes bgShift{0%{transform:translate(0,0) rotate(0deg)}100%{transform:translate(-5%,3%) rotate(2deg)}}
-        .card-hover{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
-        .card-hover:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(132,192,22,.1);border-color:rgba(132,192,22,.3)}
-        .kpi-bar{transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-        .toast{transform:translateY(100px);opacity:0;transition:all .4s ease}
-        .toast.show{transform:translateY(0);opacity:1}
-        .lang-btn{transition:all .2s ease}
-        .lang-btn.active{background:#84C016;color:#050505}
-        .mobile-menu{transform:translateX(100%);transition:transform .3s ease}
-        .mobile-menu.open{transform:translateX(0)}
-        .parallax-layer{transition:transform .1s linear}
-        @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0s!important}}
-    </style>
-</head>
-<body class="antialiased">
-
-<script>
-/* ============================== STATE ============================== */
-let appState = {
-    isLoggedIn: false,
-    userName: 'Mario Rossi',
-    hasSubscription: true,
-    currentLang: localStorage.getItem('econet-lang') || 'en',
-    currentPage: 'home',
-    mobileMenuOpen: false
-};
-
-/* ========================= TRANSLATIONS ========================= */
-const T = {
-en:{
-    nav_home:"Home",nav_overture:"I. Overture",nav_dev:"II. Dev",nav_botanical:"Botanical",nav_team:"Team",nav_gallery:"Gallery",nav_climax:"III. Climax",btn_sign_in:"Sign In",btn_dashboard:"Dashboard",
-    home_aci:"A.C.L.I. — Sex. Ceglie del Campo",home_title:'Brand <span class="text-eco-lime">Symphony</span>',home_sub:"Harmonic Marketing Method for the EcoNet Social Cooperative. A three-movement narrative for harmonic brand building.",
-    home_m1_title:"Overture",home_m1_desc:"Reveal the territory, present EcoNet's ethical mission and anchor the founding values.",
-    home_m2_title:"Development",home_m2_desc:"Build inter-cooperative relationships and B2B/B2C trust through shared supply chain.",
-    home_m3_title:"Climax",home_m3_desc:"Consolidate emotional loyalty and brand identity within the local community.",
-    ouv_title:"Overture",ouv_sub:"The Score — Mission & Founding Values",ouv_mission_title:"La Partitura",ouv_mission_text:"Create a virtuous inter-cooperative network for the valorization of the territory, the social redemption of agricultural labor, and food and botanical education.",
-    val1_h:"Legality",val1_p:"Fight against labor exploitation and transparent recruitment.",val2_h:"True Zero KM",val2_p:"Short supply chain with zero transport impact.",val3_h:"Sustainability",val3_p:"Ecology, biodiversity and regenerative farming.",val4_h:"Social Cohesion",val4_p:"Community integration and labor inclusion.",
-    dev_title:"Development",dev_sub:"Building inter-cooperative relationships and B2B/B2C trust",
-    p1_h:"Land Recovery & KM 0",p1_p:"Identify and recover abandoned agricultural land within the Ceglie del Campo area. Establish direct cultivation plots for KM 0 production, ensuring full traceability from field to table. Convert degraded land into productive organic zones.",p1_icon:"fa-seedling",
-    p2_h:"Real Estate, Infra & Training",p2_p:"Acquire or lease farm structures and storage facilities. Build logistics hubs for collection, processing, and cold storage. Create on-site training programs for agricultural skills and cooperative management.",p2_icon:"fa-warehouse",
-    p3_h:"Social Impact & Dignity",p3_p:"Provide stable, legal employment to marginalized agricultural workers. Partner with anti-caporalato organizations for transparent recruitment. Offer integration pathways, housing support, and dignified working conditions.",p3_icon:"fa-hand-holding-heart",
-    p4_h:"Production Chain & B2B/B2C",p4_p:"Develop processing facilities for value-added products. Create B2B channels with local restaurants, schools, and hospitals. Launch B2C direct-sales platforms including farmers' markets and online ordering.",p4_icon:"fa-link",
-    p5_h:"Apiculture: Pollination & Honey",p5_p:"Install apiaries across recovered lands to boost pollination and biodiversity. Produce monofloral and wildflower honey branded as EcoNet. Offer beekeeping workshops and educational hive visits.",p5_icon:"fa-bug",
-    p6_h:"Educational Hub & Botanical Path",p6_p:"Design a botanical trail through cultivated and wild areas. Build an educational center for schools and community groups. Host workshops on herbalism, permaculture, and sustainable cooking.",p6_icon:"fa-graduation-cap",
-    herbs_title:"Wild Herbs",herbs_sub:"Wild Herbs of the «Ceglie del Campo» Territory",
-    herb1_name:"Wild Fennel",herb1_sci:"Foeniculum vulgare",herb1_desc:"Aromatic perennial found along field edges. Used in local cuisine for flavoring sausages, preserves, and herbal teas. Rich in essential oils with digestive properties.",
-    herb2_name:"Mallow",herb2_sci:"Malva sylvestris",herb2_desc:"Soft-leaved biennial common in disturbed soils. Traditionally used as emollient in infusions and poultices. Mild flavor ideal for stuffed leaves and rustic salads.",
-    herb3_name:"Wild Asparagus",herb3_sci:"Asparagus acutifolius",herb3_desc:"Prized spring shoot growing in dry stone walls and olive groves. Delicate bitter flavor, highly sought after in Pugliese cuisine. Requires careful sustainable harvesting.",
-    herb4_name:"Purslane",herb4_sci:"Portulaca oleracea",herb4_desc:"Prostrate succulent annual rich in Omega-3 fatty acids. Crispy texture and slightly citrusy taste. Excellent raw in salads or lightly sautéed as a side dish.",
-    herb5_name:"Dandelion",herb5_sci:"Taraxacum officinale",herb5_desc:"Ubiquitous perennial with bright yellow flowers. Young leaves used in salads; roots roasted as coffee substitute. Known for diuretic and liver-supporting properties.",
-    herb6_name:"Borage",herb6_sci:"Borago officinalis",herb6_desc:"Hairy annual with star-shaped blue flowers. Cucumber-flavored leaves used in salads, soups, and stuffed pasta. Flowers are edible garnishes rich in gamma-linolenic acid.",
-    team_title:"Leadership Team",team_sub:"Four sections of the EcoNet symphony",
-    t1_name:"Antonio De Carlo",t1_role:"Project Developer",t1_desc:"Strategic planner with 15 years in cooperative development. Architects the three-movement brand strategy and inter-cooperative partnerships.",
-    t2_name:"Francesca Lipardi",t2_role:"General Direction",t2_desc:"Operational leader overseeing all cooperative activities. Ensures alignment between social mission and business sustainability.",
-    t3_name:"Marco Ferrante",t3_role:"Real Estate & Lands",t3_desc:"Expert in agricultural land recovery and rural infrastructure. Manages land acquisition, facility restoration, and logistics networks.",
-    t4_name:"Lucia Greco",t4_role:"Public Green & Botany",t4_desc:"Botanist and environmental educator. Designs the botanical path, manages wild herb inventory, and leads community education programs.",
-    climax_title:"Climax",climax_sub:"KPI Matrix & Crescendo Vision",
-    kpi1:"Hectares Recovered",kpi1v:"12",kpi1t:"Target: 50 ha by 2027",
-    kpi2:"Active Workers",kpi2v:"28",kpi2t:"Target: 120 by 2027",
-    kpi3:"B2B Partners",kpi3v:"15",kpi3t:"Target: 60 by 2027",
-    kpi4:"Community Events",kpi4v:"34",kpi4t:"Target: 100/year by 2027",
-    kpi5:"Honey Production",kpi5v:"800 kg",kpi5t:"Target: 3,000 kg by 2027",
-    kpi6:"Botanical Species Cataloged",kpi6v:"45",kpi6t:"Target: 150 by 2027",
-    crescendo_title:"Crescendo Vision 2027–2030",crescendo_text:"EcoNet aspires to become the reference model for social-agricultural cooperatives in Southern Italy. By 2030, the cooperative aims to manage a fully integrated ecosystem: from land recovery to processed products, from educational tourism to institutional partnerships. The Brand Symphony will resonate beyond Puglia, inspiring a national network of ethical, zero-kilometer supply chains.",
-    dash_title:"Dashboard",dash_sub:"Active",dash_cancel:"Cancel Subscription",dash_reactivate:"Reactivate Subscription",dash_signout:"Sign Out",
-    modal_signin_title:"Sign In",modal_access:"Access Hub",modal_email:"Email",modal_pass:"Password",modal_remember:"Remember me",modal_forgot:"Forgot password?",
-    foot_dev:"Project Developer",foot_dir:"General Direction",foot_re:"Real Estate & Lands",foot_green:"Public Green & Botany",
-    foot_rights:"All rights reserved.",foot_privacy:"Privacy Policy",foot_terms:"Terms of Service",foot_cookies:"Cookie Settings",
-    toast_welcome:"Welcome back!",toast_sub_cancel:"Subscription cancelled.",toast_sub_react:"Subscription reactivated.",toast_signout:"Signed out successfully.",toast_lang:"Language changed.",
-    gallery_cap1:"Recovered field at dawn — Ceglie del Campo",gallery_cap2:"Wild fennel in the morning light",gallery_cap3:"EcoNet apiary among olive trees",gallery_cap4:"Botanical path — educational signage",gallery_cap5:"Fresh harvest ready for KM 0 distribution",gallery_cap6:"Community workshop at the Educational Hub"
-},
-it:{
-    nav_home:"Home",nav_overture:"I. Overtura",nav_dev:"II. Sviluppo",nav_botanical:"Botanica",nav_team:"Team",nav_gallery:"Galleria",nav_climax:"III. Climax",btn_sign_in:"Accedi",btn_dashboard:"Dashboard",
-    home_aci:"A.C.L.I. — Sex. Ceglie del Campo",home_title:'Brand <span class="text-eco-lime">Symphony</span>',home_sub:"Metodo di Marketing Armonico per la Cooperativa Sociale EcoNet. Una narrazione in tre tempi per la costruzione armonica del brand.",
-    home_m1_title:"Overtura",home_m1_desc:"Svelare il territorio, presentare la missione etica di EcoNet e ancorare i valori fondanti.",
-    home_m2_title:"Sviluppo",home_m2_desc:"Costruire relazioni inter-cooperative e fiducia B2B/B2C attraverso filiera e servizi condivisi.",
-    home_m3_title:"Climax",home_m3_desc:"Consolidare la fedeltà emotiva e l'identità di marca nella comunità locale e nei partner istituzionali.",
-    ouv_title:"Overtura",ouv_sub:"La Partitura — Missione & Valori Fondanti",ouv_mission_title:"La Partitura",ouv_mission_text:"Creare una rete virtuosa inter-cooperativa per la valorizzazione del territorio, il riscatto sociale del lavoro agricolo e l'educazione alimentare e botanica.",
-    val1_h:"Legalità",val1_p:"Contrasto al caporalato e reclutamento trasparente.",val2_h:"KM 0 Reale",val2_p:"Filiera corta a zero impatto di trasporto.",val3_h:"Sostenibilità",val3_p:"Ecologia, biodiversità e pratiche agricole rigenerative.",val4_h:"Coesione Sociale",val4_p:"Integrazione comunitaria e inclusione lavorativa.",
-    dev_title:"Sviluppo",dev_sub:"Costruire relazioni inter-cooperative e fiducia B2B/B2C",
-    p1_h:"Recupero Terreni & KM 0",p1_p:"Identificare e recuperare terreni agricoli abbandonati nell'area di Ceglie del Campo. Istituire appezzamenti di coltivazione diretta per produzione KM 0, garantendo tracciabilità completa dal campo alla tavola. Convertire terreni degradati in zone produttive biologiche.",p1_icon:"fa-seedling",
-    p2_h:"Immobiliare, Infra & Formazione",p2_p:"Acquisire o prendere in affitto strutture rurali e magazzini. Costruire hub logistici per raccolta, lavorazione e stoccaggio a freddo. Creare programmi di formazione sul posto per competenze agricole e gestione cooperativa.",p2_icon:"fa-warehouse",
-    p3_h:"Impatto Sociale & Dignità",p3_p:"Offrire impiego stabile e legale a lavoratori agricoli marginalizzati. Collaborare con organizzazioni anti-caporalato per reclutamento trasparente. Offrire percorsi di integrazione, supporto abitativo e condizioni di lavoro dignitose.",p3_icon:"fa-hand-holding-heart",
-    p4_h:"Filiera Produttiva & B2B/B2C",p4_p:"Sviluppare strutture di lavorazione per prodotti a valore aggiunto. Creare canali B2B con ristoranti, scuole e ospedali locali. Lanciare piattaforme B2C con mercati contadini e ordini online.",p4_icon:"fa-link",
-    p5_h:"Apicoltura: Impollinazione & Miele",p5_p:"Installare apiari nei terreni recuperati per aumentare impollinazione e biodiversità. Produrre miele monoflorale e millefiori a marchio EcoNet. Offrire corsi di apicoltura e visite didattiche agli alveari.",p5_icon:"fa-bug",
-    p6_h:"Hub Educativo & Percorso Botanico",p6_p:"Progettare un percorso botanico attraverso aree coltivate e spontanee. Costruire un centro educativo per scuole e gruppi comunitari. Organizzare workshop su erboristeria, permacultura e cucina sostenibile.",p6_icon:"fa-graduation-cap",
-    herbs_title:"Erbe Spontanee",herbs_sub:"Erbe Spontanee del Territorio «Ceglie del Campo»",
-    herb1_name:"Finocchio Selvatico",herb1_sci:"Foeniculum vulgare",herb1_desc:"Perenne aromatica ai margini dei campi. Usato in cucina locale per insaporire salumi, conserve e infusi. Ricco di oli essenziali con proprietà digestive.",
-    herb2_name:"Malva",herb2_sci:"Malva sylvestris",herb2_desc:"Biennale dalle foglie morbide, comune in terreni disturbati. Usata tradizionalmente come emoliente in infusi e cataplasmi. Sapore delicato, ideale per foglie ripiene e insalate rustiche.",
-    herb3_name:"Asparago Selvatico",herb3_sci:"Asparagus acutifolius",herb3_desc:"Prezziato germoglio primaverile che cresce tra i muri a secco e gli uliveti. Sapore amaro delicato, molto ricercato nella cucina pugliese. Richiede raccolta sostenibile attenta.",
-    herb4_name:"Portulaca",herb4_sci:"Portulaca oleracea",herb4_desc:"Annuale succulenta prostrata ricca di acidi grassi Omega-3. Texture croccante e sapore leggermente agrumato. Ottima cruda in insalata o saltata leggermente come contorno.",
-    herb5_name:"Tarassaco",herb5_sci:"Taraxacum officinale",herb5_desc:"Perenne ubiquitaria con fiori gialli brillanti. Foglie giovani usate in insalata; radici tostate come surrogato del caffè. Noto per proprietà diuretiche e di supporto epatico.",
-    herb6_name:"Borragine",herb6_sci:"Borago officinalis",herb6_desc:"Annuale pelosa con fiori blu a stella. Foglie dal sapore di cetriolo usate in insalate, zuppe e pasta ripiena. I fiori sono guarnizioni commestibili ricche di acido gamma-linolenico.",
-    team_title:"Team Direttivo",team_sub:"Quattro sezioni della sinfonia EcoNet",
-    t1_name:"Antonio De Carlo",t1_role:"Sviluppatore del Progetto",t1_desc:"Progettista strategico con 15 anni di sviluppo cooperativo. Architetta la strategia di brand in tre movimenti e le partnership inter-cooperative.",
-    t2_name:"Francesca Lipardi",t2_role:"Direzione Generale",t2_desc:"Leader operativa che supervisiona tutte le attività cooperative. Garantisce l'allineamento tra missione sociale e sostenibilità aziendale.",
-    t3_name:"Marco Ferrante",t3_role:"Immobiliare & Terreni",t3_desc:"Esperto di recupero di terreni agricoli e infrastrutture rurali. Gestisce acquisizioni, restauro di strutture e reti logistiche.",
-    t4_name:"Lucia Greco",t4_role:"Verde Pubblico & Botanica",t4_desc:"Botanica e educatrice ambientale. Progetta il percorso botanico, gestisce l'inventario delle erbe spontanee e coordina i programmi educativi.",
-    climax_title:"Climax",climax_sub:"Matrice KPI & Visione Crescendo",
-    kpi1:"Ettari Recuperati",kpi1v:"12",kpi1t:"Obiettivo: 50 ha entro il 2027",kpi2:"Lavoratori Attivi",kpi2v:"28",kpi2t:"Obiettivo: 120 entro il 2027",kpi3:"Partner B2B",kpi3v:"15",kpi3t:"Obiettivo: 60 entro il 2027",kpi4:"Eventi Comunitari",kpi4v:"34",kpi4t:"Obiettivo: 100/anno entro il 2027",kpi5:"Produzione Miele",kpi5v:"800 kg",kpi5t:"Obiettivo: 3.000 kg entro il 2027",kpi6:"Specie Botaniche Catalogate",kpi6v:"45",kpi6t:"Obiettivo: 150 entro il 2027",
-    crescendo_title:"Visione Crescendo 2027–2030",crescendo_text:"EcoNet aspira a diventare il modello di riferimento per le cooperative sociali-agricole del Sud Italia. Entro il 2030, la cooperativa mira a gestire un ecosistema pienamente integrato: dal recupero dei terreni ai prodotti lavorati, dal turismo educativo alle partnership istituzionali. La Brand Symphony risuonerà oltre la Puglia, ispirando una rete nazionale di filiere etiche e a chilometro zero.",
-    dash_title:"Dashboard",dash_sub:"Attivo",dash_cancel:"Annulla Abbonamento",dash_reactivate:"Riattiva Abbonamento",dash_signout:"Esci",
-    modal_signin_title:"Accedi",modal_access:"Accedi all'Hub",modal_email:"Email",modal_pass:"Password",modal_remember:"Ricordami",modal_forgot:"Password dimenticata?",
-    foot_dev:"Sviluppatore del Progetto",foot_dir:"Direzione Generale",foot_re:"Immobiliare & Terreni",foot_green:"Verde Pubblico & Botanica",
-    foot_rights:"Tutti i diritti riservati.",foot_privacy:"Privacy Policy",foot_terms:"Termini di Servizio",foot_cookies:"Impostazioni Cookie",
-    toast_welcome:"Bentornato!",toast_sub_cancel:"Abbonamento annullato.",toast_sub_react:"Abbonamento riattivato.",toast_signout:"Disconnessione avvenuta.",toast_lang:"Lingua cambiata.",
-    gallery_cap1:"Campo recuperato all'alba — Ceglie del Campo",gallery_cap2:"Finocchio selvatico nella luce mattutina",gallery_cap3:"Apiario EcoNet tra gli ulivi",gallery_cap4:"Percorso botanico — segnaletica didattica",gallery_cap5:"Raccolta fresca pronta per distribuzione KM 0",gallery_cap6:"Workshop comunitario all'HUB Educativo"
-},
-fr:{
-    nav_home:"Accueil",nav_overture:"I. Ouverture",nav_dev:"II. Dév.",nav_botanical:"Botanique",nav_team:"Équipe",nav_gallery:"Galerie",nav_climax:"III. Apogée",btn_sign_in:"Connexion",btn_dashboard:"Tableau de bord",
-    home_aci:"A.C.L.I. — Sex. Ceglie del Campo",home_title:'Brand <span class="text-eco-lime">Symphony</span>',home_sub:"Méthode de Marketing Harmonique pour la Coopérative Sociale EcoNet. Un récit en trois mouvements pour la construction harmonique de la marque.",
-    home_m1_title:"Ouverture",home_m1_desc:"Révéler le territoire, présenter la mission éthique d'EcoNet et ancrer les valeurs fondatrices.",
-    home_m2_title:"Développement",home_m2_desc:"Construire des relations inter-coopératives et la confiance B2B/B2C grâce à la filière partagée.",
-    home_m3_title:"Apogée",home_m3_desc:"Consolider la fidélité émotionnelle et l'identité de marque au sein de la communauté locale.",
-    ouv_title:"Ouverture",ouv_sub:"La Partition — Mission & Valeurs Fondatrices",ouv_mission_title:"La Partition",ouv_mission_text:"Créer un réseau inter-coopératif vertueux pour la valorisation du territoire, la rédemption sociale du travail agricole et l'éducation alimentaire et botanique.",
-    val1_h:"Légalité",val1_p:"Lutte contre l'exploitation du travail et recrutement transparent.",val2_h:"Vrai Zéro KM",val2_p:"Filière courte avec zéro impact de transport.",val3_h:"Durabilité",val3_p:"Écologie, biodiversité et agriculture régénérative.",val4_h:"Cohésion Sociale",val4_p:"Intégration communautaire et inclusion professionnelle.",
-    dev_title:"Développement",dev_sub:"Construire des relations inter-coopératives et la confiance B2B/B2C",
-    p1_h:"Récupération des Terres & Zéro KM",p1_p:"Identifier et récupérer les terres agricoles abandonnées dans la zone de Ceglie del Campo. Établir des parcelles de culture directe pour la production Zéro KM avec traçabilité complète du champ à l'assiette.",p1_icon:"fa-seedling",
-    p2_h:"Immobilier, Infra & Formation",p2_p:"Acquérir ou louer des structures rurales et des entrepôts. Construire des hubs logistiques pour la collecte, la transformation et le stockage à froid. Créer des programmes de formation sur site.",p2_icon:"fa-warehouse",
-    p3_h:"Impact Social & Dignité",p3_p:"Offrir un emploi stable et légal aux travailleurs agricoles marginalisés. Partenariat avec des organisations anti-exploitation pour un recrutement transparent.",p3_icon:"fa-hand-holding-heart",
-    p4_h:"Chaîne de Production & B2B/B2C",p4_p:"Développer des installations de transformation pour des produits à valeur ajoutée. Créer des canaux B2B avec les restaurants, écoles et hôpitaux locaux.",p4_icon:"fa-link",
-    p5_h:"Apiculture : Pollinisation & Miel",p5_p:"Installer des ruchers sur les terres récupérées pour booster la pollinisation et la biodiversité. Produire du miel monofloral et millefleurs sous marque EcoNet.",p5_icon:"fa-bug",
-    p6_h:"Hub Éducatif & Parcours Botanique",p6_p:"Concevoir un parcours botanique à travers les zones cultivées et sauvages. Construire un centre éducatif pour les écoles et les groupes communautaires.",p6_icon:"fa-graduation-cap",
-    herbs_title:"Herbes Sauvages",herbs_sub:"Herbes Sauvages du Territoire «Ceglie del Campo»",
-    herb1_name:"Fenouil Sauvage",herb1_sci:"Foeniculum vulgare",herb1_desc:"Vivace aromatique trouvée en lisière des champs. Utilisée dans la cuisine locale pour aromatiser saucisses, confitures et infusions.",
-    herb2_name:"Mauve",herb2_sci:"Malva sylvestris",herb2_desc:"Bisannuelle aux feuilles douces, commune dans les sols perturbés. Utilisée traditionnellement comme émollient en infusions et cataplasmes.",
-    herb3_name:"Asperge Sauvage",herb3_sci:"Asparagus acutifolius",herb3_desc:"Pousses printanières prisées poussant dans les murs en pierre sèche et les oliveraies. Saveur amère délicate, très recherchée dans la cuisine des Pouilles.",
-    herb4_name:"Pourpier",herb4_sci:"Portulaca oleracea",herb4_desc:"Annuelle succulente prostrée riche en acides gras Oméga-3. Texture croquante et saveur légèrement agrumée.",
-    herb5_name:"Pissenlit",herb5_sci:"Taraxacum officinale",herb5_desc:"Vivace omniprésente aux fleurs jaunes brillantes. Feuilles jeunes en salade ; racines torréfiées comme substitut de café.",
-    herb6_name:"Bourrache",herb6_sci:"Borago officinalis",herb6_desc:"Annuelle velue aux fleurs bleues en étoile. Feuilles au goût de concombre utilisées en salades et soupes.",
-    team_title:"Équipe de Direction",team_sub:"Quatre sections de la symphonie EcoNet",
-    t1_name:"Antonio De Carlo",t1_role:"Développeur du Projet",t1_desc:"Planificateur stratégique avec 15 ans dans le développement coopératif.",
-    t2_name:"Francesca Lipardi",t2_role:"Direction Générale",t2_desc:"Leader opérationnelle supervisant toutes les activités coopératives.",
-    t3_name:"Marco Ferrante",t3_role:"Immobilier & Terres",t3_desc:"Expert en récupération de terres agricoles et infrastructures rurales.",
-    t4_name:"Lucia Greco",t4_role:"Espaces Verts & Botanique",t4_desc:"Botaniste et éducatrice environnementale. Conçoit le parcours botanique et les programmes éducatifs.",
-    climax_title:"Apogée",climax_sub:"Matrice KPI & Vision Crescendo",
-    kpi1:"Hectares Récupérés",kpi1v:"12",kpi1t:"Objectif : 50 ha d'ici 2027",kpi2:"Travailleurs Actifs",kpi2v:"28",kpi2t:"Objectif : 120 d'ici 2027",kpi3:"Partenaires B2B",kpi3v:"15",kpi3t:"Objectif : 60 d'ici 2027",kpi4:"Événements Communautaires",kpi4v:"34",kpi4t:"Objectif : 100/an d'ici 2027",kpi5:"Production de Miel",kpi5v:"800 kg",kpi5t:"Objectif : 3 000 kg d'ici 2027",kpi6:"Espèces Botaniques Cataloguées",kpi6v:"45",kpi6t:"Objectif : 150 d'ici 2027",
-    crescendo_title:"Vision Crescendo 2027–2030",crescendo_text:"EcoNet aspire à devenir le modèle de référence pour les coopératives social-agricoles du Sud de l'Italie. D'ici 2030, la coopérative vise à gérer un écosystème pleinement intégré : de la récupération des terres aux produits transformés, du tourisme éducatif aux partenariats institutionnels.",
-    dash_title:"Tableau de bord",dash_sub:"Actif",dash_cancel:"Annuler l'abonnement",dash_reactivate:"Réactiver l'abonnement",dash_signout:"Déconnexion",
-    modal_signin_title:"Connexion",modal_access:"Accéder au Hub",modal_email:"Email",modal_pass:"Mot de passe",modal_remember:"Se souvenir de moi",modal_forgot:"Mot de passe oublié ?",
-    foot_dev:"Développeur du Projet",foot_dir:"Direction Générale",foot_re:"Immobilier & Terres",foot_green:"Espaces Verts & Botanique",
-    foot_rights:"Tous droits réservés.",foot_privacy:"Politique de Confidentialité",foot_terms:"Conditions d'Utilisation",foot_cookies:"Paramètres des Cookies",
-    toast_welcome:"Bon retour !",toast_sub_cancel:"Abonnement annulé.",toast_sub_react:"Abonnement réactivé.",toast_signout:"Déconnexion réussie.",toast_lang:"Langue modifiée.",
-    gallery_cap1:"Champ récupéré à l'aube — Ceglie del Campo",gallery_cap2:"Fenouil sauvage dans la lumière matinale",gallery_cap3:"Rucher EcoNet parmi les oliviers",gallery_cap4:"Parcours botanique — signalétique éducative",gallery_cap5:"Récolte fraîche prête pour distribution Zéro KM",gallery_cap6:"Atelier communautaire au Hub Éducatif"
-},
-de:{
-    nav_home:"Start",nav_overture:"I. Ouvertüre",nav_dev:"II. Entw.",nav_botanical:"Botanik",nav_team:"Team",nav_gallery:"Galerie",nav_climax:"III. Höhepunkt",btn_sign_in:"Anmelden",btn_dashboard:"Dashboard",
-    home_aci:"A.C.L.I. — Sex. Ceglie del Campo",home_title:'Brand <span class="text-eco-lime">Symphony</span>',home_sub:"Harmonische Marketingmethode für die Sozialgenossenschaft EcoNet. Eine Erzählung in drei Sätzen für harmonischen Markenaufbau.",
-    home_m1_title:"Ouvertüre",home_m1_desc:"Das Gebiet offenbaren, die ethische Mission von EcoNet präsentieren und die Grundwerte verankern.",
-    home_m2_title:"Entwicklung",home_m2_desc:"Interkooperative Beziehungen und B2B/B2C-Vertrauen durch gemeinsame Lieferkette aufbauen.",
-    home_m3_title:"Höhepunkt",home_m3_desc:"Emotionale Loyalität und Markenidentität in der lokalen Gemeinschaft festigen.",
-    ouv_title:"Ouvertüre",ouv_sub:"Die Partitur — Mission & Grundwerte",ouv_mission_title:"Die Partitur",ouv_mission_text:"Ein tugendhaftes interkooperatives Netzwerk schaffen für die Aufwertung des Gebiets, die soziale Erlösung der Landarbeit sowie Lebensmittel- und Botanikbildung.",
-    val1_h:"Legalität",val1_p:"Kampf gegen Arbeitsausbeutung und transparente Rekrutierung.",val2_h:"Echtes Null KM",val2_p:"Kurze Lieferkette mit null Transportauswirkung.",val3_h:"Nachhaltigkeit",val3_p:"Ökologie, Biodiversität und regenerative Landwirtschaft.",val4_h:"Sozialer Zusammenhalt",val4_p:"Gemeinschaftsintegration und Arbeitsinklusion.",
-    dev_title:"Entwicklung",dev_sub:"Interkooperative Beziehungen und B2B/B2C-Vertrauen aufbauen",
-    p1_h:"Landrückgewinnung & Null KM",p1_p:"Verlassene landwirtschaftliche Flächen im Bereich Ceglie del Campo identifizieren und zurückgewinnen. Direktbewirtschaftungsflächen für Null-KM-Produktion mit vollständiger Rückverfolgbarkeit vom Feld zum Tisch einrichten.",p1_icon:"fa-seedling",
-    p2_h:"Immobilien, Infra & Ausbildung",p2_p:"Landwirtschaftliche Strukturen und Lagerhallen erwerben oder pachten. Logistik-Hubs für Sammlung, Verarbeitung und Kühlung bauen. Ausbildungsprogramme vor Ort erstellen.",p2_icon:"fa-warehouse",
-    p3_h:"Soziale Auswirkung & Würde",p3_p:"Stabile, legale Beschäftigung für marginalisierte Landarbeiter bieten. Mit Anti-Ausbeutungsorganisationen für transparente Rekrutierung zusammenarbeiten.",p3_icon:"fa-hand-holding-heart",
-    p4_h:"Produktionskette & B2B/B2C",p4_p:"Verarbeitungsanlagen für wertsteigernde Produkte entwickeln. B2B-Kanäle mit lokalen Restaurants, Schulen und Krankenhäusern schaffen.",p4_icon:"fa-link",
-    p5_h:"Imkerei: Bestäubung & Honig",p5_p:"Bienenstände auf zurückgewonnenen Flächen installieren zur Förderung von Bestäubung und Biodiversität. Monofloral- und Wildblumenhonig unter der Marke EcoNet produzieren.",p5_icon:"fa-bug",
-    p6_h:"Bildungszentrum & Botanischer Pfad",p6_p:"Einen botanischen Pfad durch angebaute und wilde Bereiche entwerfen. Ein Bildungszentrum für Schulen und Gemeinschaftsgruppen bauen.",p6_icon:"fa-graduation-cap",
-    herbs_title:"Wildkräuter",herbs_sub:"Wildkräuter des Gebiets «Ceglie del Campo»",
-    herb1_name:"Wilder Fenchel",herb1_sci:"Foeniculum vulgare",herb1_desc:"Aromatische Staude an Feldrändern. In der lokalen Küche zum Würzen von Wurstwaren, Konfitüren und Aufgüssen verwendet.",
-    herb2_name:"Malve",herb2_sci:"Malva sylvestris",herb2_desc:"Zweijährige Pflanze mit weichen Blättern, häufig auf gestörten Böden. Traditionell als Emolliens in Tees und Umschlägen verwendet.",
-    herb3_name:"Wilder Spargel",herb3_sci:"Asparagus acutifolius",herb3_desc:"Geschätzte Frühlings Triebe, wachsend in Trockenmauern und Olivenhainen. Delikater bitterer Geschmack, sehr begehrt in der apulischen Küche.",
-    herb4_name:"Purslane",herb4_sci:"Portulaca oleracea",herb4_desc:"Niedrig wachsende, saftige einjährige Pflanze, reich an Omega-3-Fettsäuren. Knackige Textur und leicht zitrusartiger Geschmack.",
-    herb5_name:"Löwenzahn",herb5_sci:"Taraxacum officinale",herb5_desc:"Allgegenwärtige Staude mit leuchtend gelben Blüten. Junge Blätter im Salat; geröstete Wurzeln als Kaffeeersatz.",
-    herb6_name:"Borretsch",herb6_sci:"Borago officinalis",herb6_desc:"Behaarte einjährige Pflanze mit sternförmigen blauen Blüten. Blätter mit Gurkengeschmack in Salaten und Suppen.",
-    team_title:"Führungsteam",team_sub:"Vier Sätze der EcoNet-Sinfonie",
-    t1_name:"Antonio De Carlo",t1_role:"Projektentwickler",t1_desc:"Strategischer Planer mit 15 Jahren Erfahrung in der Genossenschaftsentwicklung.",
-    t2_name:"Francesca Lipardi",t2_role:"Generalleitung",t2_desc:"Operative Leiterin, die alle Genossenschaftsaktivitäten beaufsichtigt.",
-    t3_name:"Marco Ferrante",t3_role:"Immobilien & Land",t3_desc:"Experte für Rückgewinnung landwirtschaftlicher Flächen und ländliche Infrastruktur.",
-    t4_name:"Lucia Greco",t4_role:"Öffentliche Grünflächen & Botanik",t4_desc:"Botanikerin und Umweltbildnerin. Entwirft den botanischen Pfad und Bildungsprogramme.",
-    climax_title:"Höhepunkt",climax_sub:"KPI-Matrix & Crescendo-Vision",
-    kpi1:"Zurückeroberte Hektar",kpi1v:"12",kpi1t:"Ziel: 50 ha bis 2027",kpi2:"Aktive Arbeiter",kpi2v:"28",kpi2t:"Ziel: 120 bis 2027",kpi3:"B2B-Partner",kpi3v:"15",kpi3t:"Ziel: 60 bis 2027",kpi4:"Gemeinschaftsveranstaltungen",kpi4v:"34",kpi4t:"Ziel: 100/Jahr bis 2027",kpi5:"Honigproduktion",kpi5v:"800 kg",kpi5t:"Ziel: 3.000 kg bis 2027",kpi6:"Katalogisierte Botanische Arten",kpi6v:"45",kpi6t:"Ziel: 150 bis 2027",
-    crescendo_title:"Crescendo-Vision 2027–2030",crescendo_text:"EcoNet strebt an, das Referenzmodell für sozial-landwirtschaftliche Genossenschaften in Süditalien zu werden. Bis 2030 zielt die Genossenschaft darauf ab, ein vollständig integriertes Ökosystem zu verwalten: von der Landrückgewinnung bis zu verarbeiteten Produkten, vom Bildungstourismus bis zu institutionellen Partnerschaften.",
-    dash_title:"Dashboard",dash_sub:"Aktiv",dash_cancel:"Abo kündigen",dash_reactivate:"Abo reaktivieren",dash_signout:"Abmelden",
-    modal_signin_title:"Anmelden",modal_access:"Hub zugreifen",modal_email:"E-Mail",modal_pass:"Passwort",modal_remember:"Angemeldet bleiben",modal_forgot:"Passwort vergessen?",
-    foot_dev:"Projektentwickler",foot_dir:"Generalleitung",foot_re:"Immobilien & Land",foot_green:"Öffentliche Grünflächen & Botanik",
-    foot_rights:"Alle Rechte vorbehalten.",foot_privacy:"Datenschutzrichtlinie",foot_terms:"Nutzungsbedingungen",foot_cookies:"Cookie-Einstellungen",
-    toast_welcome:"Willkommen zurück!",toast_sub_cancel:"Abo gekündigt.",toast_sub_react:"Abo reaktiviert.",toast_signout:"Erfolgreich abgemeldet.",toast_lang:"Sprache geändert.",
-    gallery_cap1:"Zurückerobertes Feld bei Dämmerung — Ceglie del Campo",gallery_cap2:"Wilder Fenchel im Morgenlicht",gallery_cap3:"EcoNet-Bienenstand zwischen Olivenbäumen",gallery_cap4:"Botanischer Pfad — educationelle Beschilderung",gallery_cap5:"Frische Ernte bereit für Null-KM-Verteilung",gallery_cap6:"Gemeinschafts-Workshop im Bildungszentrum"
-}
-};
-function t(key){return T[appState.currentLang][key]||T['en'][key]||key}
-
-/* ======================== HELPERS ======================== */
-function navigateTo(page){
-    appState.currentPage=page;
-    document.querySelectorAll('.page-container').forEach(p=>p.classList.remove('page-active'));
-    const target=document.getElementById('page-'+page);
-    if(target){setTimeout(()=>target.classList.add('page-active'),30)}
-    document.querySelectorAll('.nav-link').forEach(l=>{l.classList.toggle('active',l.dataset.page===page)});
-    window.scrollTo({top:0,behavior:'smooth'});
-    closeMobileMenu();
-    setTimeout(observeAnimations,100);
-}
-
-function setLang(lang){
-    appState.currentLang=lang;
-    localStorage.setItem('econet-lang',lang);
-    renderAll();
-    showToast(t('toast_lang'),'fa-globe');
-}
-
-function showToast(msg,icon='fa-check'){
-    const el=document.getElementById('toast');
-    el.innerHTML=`<i class="fa-solid ${icon} text-eco-lime mr-3"></i>${msg}`;
-    el.classList.add('show');
-    setTimeout(()=>el.classList.remove('show'),3000);
-}
-
-function openModal(id){document.getElementById(id).classList.remove('hidden');document.body.style.overflow='hidden'}
-function closeModal(id){document.getElementById(id).classList.add('hidden');document.body.style.overflow=''}
-
-function toggleMobileMenu(){
-    appState.mobileMenuOpen=!appState.mobileMenuOpen;
-    document.getElementById('mobile-menu').classList.toggle('open',appState.mobileMenuOpen);
-}
-function closeMobileMenu(){appState.mobileMenuOpen=false;document.getElementById('mobile-menu').classList.remove('open')}
-
-function handleSignIn(e){
-    e.preventDefault();
-    appState.isLoggedIn=true;
-    closeModal('signin-modal');
-    renderAll();
-    showToast(t('toast_welcome'),'fa-user-check');
-}
-
-function handleSignOut(){
-    appState.isLoggedIn=false;
-    appState.hasSubscription=true;
-    renderAll();
-    navigateTo('home');
-    showToast(t('toast_signout'),'fa-right-from-bracket');
-}
-
-function toggleSubscription(){
-    appState.hasSubscription=!appState.hasSubscription;
-    renderAll();
-    showToast(appState.hasSubscription?t('toast_sub_react'):t('toast_sub_cancel'),'fa-credit-card');
-}
-
-function openImageModal(src,cap){
-    const m=document.getElementById('image-modal');
-    m.querySelector('img').src=src;
-    m.querySelector('p').textContent=cap;
-    m.classList.remove('hidden');
-    document.body.style.overflow='hidden';
-    m.querySelector('img').style.transform='scale(1)';
-}
-
-function handleModalZoom(e){
-    const img=e.currentTarget.querySelector('img');
-    const r=img.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    img.style.transform=`scale(2.5) translate(${-x*40}%,${-y*40}%)`;
-}
-
-/* ======================== SCROLL ANIMATIONS ======================== */
-function observeAnimations(){
-    const obs=new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
-    },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-    document.querySelectorAll('.fade-in-up,.slide-left,.slide-right').forEach(el=>{
-        if(!el.classList.contains('visible'))obs.observe(el);
-    });
-    /* Animate KPI bars */
-    const kpiObs=new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{if(e.isIntersecting){
-            e.target.querySelectorAll('.kpi-bar').forEach(bar=>{
-                const w=bar.dataset.width;
-                setTimeout(()=>bar.style.width=w+'%',100);
-            });
-            kpiObs.unobserve(e.target);
-        }});
-    },{threshold:0.2});
-    document.querySelectorAll('.kpi-container').forEach(c=>kpiObs.observe(c));
-}
-
-/* ======================== RENDER ======================== */
-function renderNav(){
-    const l=appState.currentLang;
-    return `
-    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-eco-black/80 border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" onclick="navigateTo('home');return false" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full bg-eco-lime/10 border border-eco-lime/30 flex items-center justify-center group-hover:bg-eco-lime/20 transition-all pulse-ring">
-                    <i class="fa-solid fa-leaf text-eco-lime text-sm"></i>
-                </div>
-                <span class="font-partitura font-bold text-lg tracking-tight hidden sm:block">EcoNet</span>
-            </a>
-            <div class="hidden lg:flex items-center gap-8">
-                <a href="#" class="nav-link text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors ${appState.currentPage==='home'?'active text-white':''}" data-page="home" onclick="navigateTo('home');return false">${t('nav_home')}</a>
-                <a href="#" class="nav-link text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors ${appState.currentPage==='overture'?'active text-white':''}" data-page="overture" onclick="navigateTo('overture');return false">${t('nav_overture')}</a>
-                <a href="#" class="nav-link text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors ${appState.currentPage==='dev'?'active text-white':''}" data-page="dev" onclick="navigateTo('dev');return false">${t('nav_dev')}</a>
-                <a href="#" class="nav-link text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors ${appState.currentPage==='botanical'?'active text-white':''}" data-page="botanical" onclick="navigateTo('botanical');return false">${t('nav_botanical')}</a>
-                <a href="#" class="nav-link text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors ${appState.currentPage==='team'?'active text-white':''}" data-page="team" onclick="navigateTo('team');return false">${t('nav_team')}</a>
-                <a href="#" class="nav-link text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors ${appState.currentPage==='gallery'?'active text-white':''}" data-page="gallery" onclick="navigateTo('gallery');return false">${t('nav_gallery')}</a>
-                <a href="#" class="nav-link text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors ${appState.currentPage==='climax'?'active text-white':''}" data-page="climax" onclick="navigateTo('climax');return false">${t('nav_climax')}</a>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="hidden sm:flex items-center bg-eco-gray rounded-full p-0.5 border border-white/5">
-                    ${['en','it','fr','de'].map(c=>`<button onclick="setLang('${c}')" class="lang-btn px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all ${appState.currentLang===c?'active':'text-neutral-500 hover:text-white'}">${c}</button>`).join('')}
-                </div>
-                ${appState.isLoggedIn
-                    ?`<button onclick="navigateTo('dashboard')" class="bg-eco-lime text-eco-black px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-eco-lime/90 transition-all">${t('btn_dashboard')}</button>`
-                    :`<button onclick="openModal('signin-modal')" class="border border-eco-lime/40 text-eco-lime px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-eco-lime/10 transition-all">${t('btn_sign_in')}</button>`
-                }
-                <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 flex items-center justify-center text-neutral-400 hover:text-white transition-colors"><i class="fa-solid ${appState.mobileMenuOpen?'fa-xmark':'fa-bars'}"></i></button>
-            </div>
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <div class="hero-visual">
+        <div class="hero-visual-orb">
+          <img src="logo-econet.jpg" alt="EcoNet" class="hero-logo-img" />
         </div>
-    </nav>
-    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-80 h-full z-[60] bg-eco-black/95 backdrop-blur-xl border-l border-white/5 p-8 pt-24 flex flex-col gap-6">
-        ${['home','overture','dev','botanical','team','gallery','climax'].map(p=>`<a href="#" class="text-lg font-semibold ${appState.currentPage===p?'text-eco-lime':'text-neutral-300'} hover:text-eco-lime transition-colors" onclick="navigateTo('${p}');return false">${t('nav_'+p)}</a>`).join('')}
-        <div class="flex gap-2 mt-4">${['en','it','fr','de'].map(c=>`<button onclick="setLang('${c}')" class="lang-btn flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border border-white/10 ${appState.currentLang===c?'active':'text-neutral-500'}">${c}</button>`).join('')}</div>
-    </div>`;
-}
-
-function renderHome(){
-    return `
-    <section class="hero-bg min-h-screen flex items-center justify-center pt-20 pentagramma relative">
-        <div class="absolute top-32 left-10 w-72 h-72 bg-eco-lime/5 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-eco-lime/3 rounded-full blur-[150px]"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <div class="fade-in-up">
-                <p class="text-[10px] font-mono uppercase tracking-[.25em] text-neutral-500 mb-8">${t('home_aci')}</p>
-                <h1 class="font-partitura text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] mb-8">${t('home_title')}</h1>
-                <p class="text-lg md:text-xl font-light text-neutral-400 max-w-2xl mx-auto leading-relaxed mb-16">${t('home_sub')}</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in-up" style="transition-delay:.2s">
-                ${[['home_m1_title','home_m1_desc','fa-music'],['home_m2_title','home_m2_desc','fa-layer-group'],['home_m3_title','home_m3_desc','fa-bolt']].map(([ti,de,ic],i)=>`
-                <div class="bg-eco-card border border-eco-border rounded-2xl p-8 text-left card-hover group">
-                    <div class="w-12 h-12 rounded-xl bg-eco-lime/10 flex items-center justify-center mb-5 group-hover:bg-eco-lime/20 transition-all">
-                        <i class="fa-solid ${ic} text-eco-lime"></i>
-                    </div>
-                    <p class="text-[10px] font-mono uppercase tracking-widest text-eco-lime mb-2">Movimento ${['I','II','III'][i]}</p>
-                    <h3 class="font-partitura text-xl font-bold mb-3">${t(ti)}</h3>
-                    <p class="text-sm text-neutral-500 leading-relaxed">${t(de)}</p>
-                </div>`).join('')}
-            </div>
-            <div class="mt-20 fade-in-up" style="transition-delay:.4s">
-                <button onclick="navigateTo('overture')" class="inline-flex items-center gap-3 bg-eco-lime text-eco-black px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:shadow-[0_0_40px_rgba(132,192,22,.3)] transition-all group">
-                    <span>Begin the Symphony</span>
-                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                </button>
-            </div>
-        </div>
-    </section>`;
-}
-
-function renderOverture(){
-    return `
-    <section class="min-h-screen pt-32 pb-20 pentagramma relative">
-        <div class="absolute top-40 right-0 w-80 h-80 bg-eco-lime/5 rounded-full blur-[140px]"></div>
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <div class="slide-left">
-                <p class="text-[10px] font-mono uppercase tracking-[.25em] text-eco-lime mb-4">Movimento I</p>
-                <h2 class="font-partitura text-4xl md:text-6xl font-black tracking-tight mb-4">${t('ouv_title')}</h2>
-                <p class="text-lg text-neutral-400 font-light mb-16">${t('ouv_sub')}</p>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-                <div class="slide-left" style="transition-delay:.1s">
-                    <div class="bg-eco-card border border-eco-border rounded-2xl p-10 glow-lime">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="w-10 h-10 rounded-full bg-eco-lime/20 flex items-center justify-center"><i class="fa-solid fa-scroll text-eco-lime text-sm"></i></div>
-                            <h3 class="font-partitura text-2xl font-bold">${t('ouv_mission_title')}</h3>
-                        </div>
-                        <p class="text-neutral-300 leading-relaxed text-lg font-light">${t('ouv_mission_text')}</p>
-                    </div>
-                </div>
-                <div class="slide-right" style="transition-delay:.2s">
-                    <div class="img-zoom rounded-2xl overflow-hidden border border-eco-border" onclick="openImageModal('https://picsum.photos/seed/econet-overture/800/500.jpg','${t('gallery_cap1')}')">
-                        <img src="https://picsum.photos/seed/econet-overture/800/500.jpg" alt="Territory" class="w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700">
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                ${[['val1_h','val1_p','fa-gavel','slide-left'],['val2_h','val2_p','fa-route','slide-right'],['val3_h','val3_p','fa-recycle','slide-left'],['val4_h','val4_p','fa-people-group','slide-right']].map(([h,p,ic,anim],i)=>`
-                <div class="fade-in-up bg-eco-card border border-eco-border rounded-2xl p-8 card-hover" style="transition-delay:${.1+i*.1}s">
-                    <div class="flex items-start gap-5">
-                        <div class="w-14 h-14 rounded-xl bg-eco-lime/10 flex items-center justify-center flex-shrink-0"><i class="fa-solid ${ic} text-eco-lime text-xl"></i></div>
-                        <div><h4 class="font-partitura text-xl font-bold mb-2">${t(h)}</h4><p class="text-neutral-500 text-sm leading-relaxed">${t(p)}</p></div>
-                    </div>
-                </div>`).join('')}
-            </div>
-        </div>
-    </section>`;
-}
-
-function renderDev(){
-    const programs=[['p1','p1_icon'],['p2','p2_icon'],['p3','p3_icon'],['p4','p4_icon'],['p5','p5_icon'],['p6','p6_icon']];
-    return `
-    <section class="min-h-screen pt-32 pb-20 pentagramma relative">
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-eco-lime/4 rounded-full blur-[160px]"></div>
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <div class="slide-left">
-                <p class="text-[10px] font-mono uppercase tracking-[.25em] text-eco-lime mb-4">Movimento II</p>
-                <h2 class="font-partitura text-4xl md:text-6xl font-black tracking-tight mb-4">${t('dev_title')}</h2>
-                <p class="text-lg text-neutral-400 font-light mb-16">${t('dev_sub')}</p>
-            </div>
-            <div class="space-y-4">
-                ${programs.map(([key,ic],i)=>`
-                <div class="fade-in-up bg-eco-card border border-eco-border rounded-2xl overflow-hidden card-hover" style="transition-delay:${i*.08}s">
-                    <button onclick="this.nextElementSibling.classList.toggle('accordion-open');this.querySelector('.chevron').classList.toggle('rotate-180')" class="w-full flex items-center justify-between p-6 md:p-8 text-left group">
-                        <div class="flex items-center gap-5">
-                            <div class="w-12 h-12 rounded-xl bg-eco-lime/10 flex items-center justify-center group-hover:bg-eco-lime/20 transition-all"><i class="fa-solid ${t(ic)} text-eco-lime"></i></div>
-                            <div>
-                                <p class="text-[10px] font-mono uppercase tracking-widest text-eco-lime/60 mb-1">Programma ${String(i+1).padStart(2,'0')}</p>
-                                <h3 class="font-partitura text-lg md:text-xl font-bold">${t(key+'_h')}</h3>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-chevron-down chevron text-neutral-500 transition-transform duration-300"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 md:px-8 pb-8 pl-[88px]">
-                            <p class="text-neutral-400 leading-relaxed">${t(key+'_p')}</p>
-                        </div>
-                    </div>
-                </div>`).join('')}
-            </div>
-        </div>
-    </section>`;
-}
-
-function renderBotanical(){
-    const herbs=[['herb1','econet-fennel'],['herb2','econet-mallow'],['herb3','econet-asparagus'],['herb4','econet-purslane'],['herb5','econet-dandelion'],['herb6','econet-borage']];
-    return `
-    <section class="min-h-screen pt-32 pb-20 pentagramma relative">
-        <div class="absolute top-60 right-20 w-72 h-72 bg-eco-lime/5 rounded-full blur-[120px]"></div>
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <div class="slide-left">
-                <p class="text-[10px] font-mono uppercase tracking-[.25em] text-eco-lime mb-4">Botanica</p>
-                <h2 class="font-partitura text-4xl md:text-6xl font-black tracking-tight mb-4">${t('herbs_title')}</h2>
-                <p class="text-lg text-neutral-400 font-light mb-16">${t('herbs_sub')}</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                ${herbs.map(([key,seed],i)=>`
-                <div class="fade-in-up bg-eco-card border border-eco-border rounded-2xl overflow-hidden card-hover group" style="transition-delay:${i*.08}s">
-                    <div class="img-zoom overflow-hidden" onclick="openImageModal('https://picsum.photos/seed/${seed}/600/400.jpg','${t(key+'_name')} — ${t(key+'_sci')}')">
-                        <img src="https://picsum.photos/seed/${seed}/600/400.jpg" alt="${t(key+'_name')}" class="w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
-                    </div>
-                    <div class="p-6">
-                        <p class="text-[10px] font-mono uppercase tracking-widest text-eco-lime/60 mb-2 italic">${t(key+'_sci')}</p>
-                        <h3 class="font-partitura text-xl font-bold mb-3">${t(key+'_name')}</h3>
-                        <p class="text-sm text-neutral-500 leading-relaxed">${t(key+'_desc')}</p>
-                    </div>
-                </div>`).join('')}
-            </div>
-        </div>
-    </section>`;
-}
-
-function renderTeam(){
-    const members=[['t1','econet-antonio','fa-compass-drafting'],['t2','econet-francesca','fa-bullseye'],['t3','econet-marco','fa-map-location-dot'],['t4','econet-lucia','fa-leaf']];
-    return `
-    <section class="min-h-screen pt-32 pb-20 pentagramma relative">
-        <div class="absolute top-40 left-20 w-64 h-64 bg-eco-lime/5 rounded-full blur-[100px]"></div>
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <div class="slide-left">
-                <p class="text-[10px] font-mono uppercase tracking-[.25em] text-eco-lime mb-4">Team</p>
-                <h2 class="font-partitura text-4xl md:text-6xl font-black tracking-tight mb-4">${t('team_title')}</h2>
-                <p class="text-lg text-neutral-400 font-light mb-16">${t('team_sub')}</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                ${members.map(([key,seed,ic],i)=>`
-                <div class="fade-in-up flex gap-6 bg-eco-card border border-eco-border rounded-2xl p-8 card-hover" style="transition-delay:${i*.1}s">
-                    <div class="flex-shrink-0">
-                        <div class="w-20 h-20 rounded-2xl overflow-hidden border-2 border-eco-lime/20">
-                            <img src="https://picsum.photos/seed/${seed}/200/200.jpg" alt="${t(key+'_name')}" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid ${ic} text-eco-lime text-xs"></i>
-                            <p class="text-[10px] font-mono uppercase tracking-widest text-eco-lime/60">${t(key+'_role')}</p>
-                        </div>
-                        <h3 class="font-partitura text-2xl font-bold mb-2">${t(key+'_name')}</h3>
-                        <p class="text-sm text-neutral-500 leading-relaxed">${t(key+'_desc')}</p>
-                    </div>
-                </div>`).join('')}
-            </div>
-        </div>
-    </section>`;
-}
-
-function renderGallery(){
-    const imgs=[
-        ['econet-gallery1','gallery_cap1','col-span-2 row-span-2'],
-        ['econet-gallery2','gallery_cap2',''],
-        ['econet-gallery3','gallery_cap3',''],
-        ['econet-gallery4','gallery_cap4',''],
-        ['econet-gallery5','gallery_cap5','col-span-2'],
-        ['econet-gallery6','gallery_cap6','']
-    ];
-    return `
-    <section class="min-h-screen pt-32 pb-20 pentagramma relative">
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <div class="slide-left">
-                <p class="text-[10px] font-mono uppercase tracking-[.25em] text-eco-lime mb-4">Gallery</p>
-                <h2 class="font-partitura text-4xl md:text-6xl font-black tracking-tight mb-4">${t('nav_gallery')}</h2>
-                <p class="text-lg text-neutral-400 font-light mb-16">EcoNet in frames</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">
-                ${imgs.map(([seed,cap,cls],i)=>`
-                <div class="fade-in-up ${cls} img-zoom rounded-2xl overflow-hidden border border-eco-border relative group" style="transition-delay:${i*.06}s" onclick="openImageModal('https://picsum.photos/seed/${seed}/800/600.jpg','${t(cap)}')">
-                    <img src="https://picsum.photos/seed/${seed}/800/600.jpg" alt="${t(cap)}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                        <p class="text-xs font-light text-white/90">${t(cap)}</p>
-                    </div>
-                </div>`).join('')}
-            </div>
-        </div>
-    </section>`;
-}
-
-function renderClimax(){
-    const kpis=[
-        ['kpi1','kpi1v','kpi1t',24],
-        ['kpi2','kpi2v','kpi2t',23],
-        ['kpi3','kpi3v','kpi3t',25],
-        ['kpi4','kpi4v','kpi4t',34],
-        ['kpi5','kpi5v','kpi5t',27],
-        ['kpi6','kpi6v','kpi6t',30]
-    ];
-    return `
-    <section class="min-h-screen pt-32 pb-20 pentagramma relative">
-        <div class="absolute bottom-20 right-0 w-96 h-96 bg-eco-lime/6 rounded-full blur-[160px]"></div>
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <div class="slide-left">
-                <p class="text-[10px] font-mono uppercase tracking-[.25em] text-eco-lime mb-4">Movimento III</p>
-                <h2 class="font-partitura text-4xl md:text-6xl font-black tracking-tight mb-4">${t('climax_title')}</h2>
-                <p class="text-lg text-neutral-400 font-light mb-16">${t('climax_sub')}</p>
-            </div>
-            <div class="kpi-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-                ${kpis.map(([key,val,tgt,pct],i)=>`
-                <div class="fade-in-up bg-eco-card border border-eco-border rounded-2xl p-8 card-hover" style="transition-delay:${i*.08}s">
-                    <p class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-3">${t(key)}</p>
-                    <p class="font-partitura text-4xl font-black text-eco-lime mb-4">${t(val)}</p>
-                    <div class="w-full h-2 bg-eco-gray rounded-full overflow-hidden mb-3">
-                        <div class="kpi-bar h-full bg-gradient-to-r from-eco-lime/60 to-eco-lime rounded-full" style="width:0%" data-width="${pct}"></div>
-                    </div>
-                    <p class="text-[11px] text-neutral-600">${t(tgt)}</p>
-                </div>`).join('')}
-            </div>
-            <div class="fade-in-up" style="transition-delay:.3s">
-                <div class="bg-eco-card border border-eco-border rounded-2xl p-10 md:p-14 glow-lime relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-eco-lime/5 rounded-full blur-[80px]"></div>
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="w-10 h-10 rounded-full bg-eco-lime/20 flex items-center justify-center"><i class="fa-solid fa-bolt text-eco-lime"></i></div>
-                            <h3 class="font-partitura text-2xl md:text-3xl font-bold">${t('crescendo_title')}</h3>
-                        </div>
-                        <p class="text-neutral-400 leading-relaxed text-lg font-light max-w-3xl">${t('crescendo_text')}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>`;
-}
-
-function renderDashboard(){
-    return `
-    <section class="min-h-screen pt-32 pb-20 pentagramma relative">
-        <div class="max-w-4xl mx-auto px-6 relative z-10">
-            <div class="slide-left">
-                <p class="text-[10px] font-mono uppercase tracking-[.25em] text-eco-lime mb-4">Hub</p>
-                <h2 class="font-partitura text-4xl md:text-6xl font-black tracking-tight mb-4">${t('dash_title')}</h2>
-                <p class="text-lg text-neutral-400 font-light mb-16">${appState.userName}</p>
-            </div>
-            <div class="space-y-6">
-                <div class="fade-in-up bg-eco-card border border-eco-border rounded-2xl p-8 card-hover" style="transition-delay:.1s">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-2xl bg-eco-lime/10 flex items-center justify-center"><i class="fa-solid fa-user text-eco-lime text-xl"></i></div>
-                            <div>
-                                <p class="text-xs text-neutral-500 uppercase tracking-widest">Account</p>
-                                <p class="font-partitura text-xl font-bold">${appState.userName}</p>
-                            </div>
-                        </div>
-                        <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${appState.hasSubscription?'bg-eco-lime/10 text-eco-lime border border-eco-lime/20':'bg-red-500/10 text-red-400 border border-red-500/20'}">${appState.hasSubscription?t('dash_sub'):'Inactive'}</span>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <button onclick="toggleSubscription()" class="${appState.hasSubscription?'bg-red-500/10 text-red-400 border-red-500/20 hover:bg-red-500/20':'bg-eco-lime/10 text-eco-lime border-eco-lime/20 hover:bg-eco-lime/20'} border px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all">
-                            <i class="fa-solid ${appState.hasSubscription?'fa-xmark':'fa-check'} mr-2"></i>${appState.hasSubscription?t('dash_cancel'):t('dash_reactivate')}
-                        </button>
-                        <button onclick="handleSignOut()" class="border border-white/10 text-neutral-400 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-white/5 hover:text-white transition-all">
-                            <i class="fa-solid fa-right-from-bracket mr-2"></i>${t('dash_signout')}
-                        </button>
-                    </div>
-                </div>
-                <div class="fade-in-up grid grid-cols-1 md:grid-cols-3 gap-6" style="transition-delay:.2s">
-                    ${[['fa-leaf','12 ha',t('kpi1')],['fa-users','28',t('kpi2')],['fa-handshake','15',t('kpi3')]].map(([ic,val,label])=>`
-                    <div class="bg-eco-card border border-eco-border rounded-2xl p-6 text-center card-hover">
-                        <i class="fa-solid ${ic} text-eco-lime/40 text-2xl mb-3"></i>
-                        <p class="font-partitura text-2xl font-bold text-white mb-1">${val}</p>
-                        <p class="text-[10px] text-neutral-500 uppercase tracking-widest">${label}</p>
-                    </div>`).join('')}
-                </div>
-            </div>
-        </div>
-    </section>`;
-}
-
-function renderFooter(){
-    return `
-    <footer class="border-t border-white/5 py-16 mt-10">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div>
-                    <div class="flex items-center gap-3 mb-5">
-                        <div class="w-8 h-8 rounded-full bg-eco-lime/10 border border-eco-lime/30 flex items-center justify-center"><i class="fa-solid fa-leaf text-eco-lime text-xs"></i></div>
-                        <span class="font-partitura font-bold">EcoNet</span>
-                    </div>
-                    <p class="text-sm text-neutral-600 leading-relaxed">Brand Symphony — Harmonic Marketing Method</p>
-                </div>
-                <div><p class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4">${t('foot_dev')}</p><p class="text-sm text-neutral-400">Antonio De Carlo</p></div>
-                <div><p class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4">${t('foot_dir')}</p><p class="text-sm text-neutral-400">Francesca Lipardi</p></div>
-                <div class="flex flex-col gap-4">
-                    <div><p class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4">${t('foot_re')}</p><p class="text-sm text-neutral-400">Marco Ferrante</p></div>
-                    <div><p class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4">${t('foot_green')}</p><p class="text-sm text-neutral-400">Lucia Greco</p></div>
-                </div>
-            </div>
-            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-xs text-neutral-600">© ${new Date().getFullYear()} EcoNet Soc. Coop. — ${t('foot_rights')}</p>
-                <div class="flex items-center gap-6">
-                    <a href="#" class="text-xs text-neutral-600 hover:text-eco-lime transition-colors">${t('foot_privacy')}</a>
-                    <a href="#" class="text-xs text-neutral-600 hover:text-eco-lime transition-colors">${t('foot_terms')}</a>
-                    <a href="#" class="text-xs text-neutral-600 hover:text-eco-lime transition-colors">${t('foot_cookies')}</a>
-                </div>
-            </div>
-        </div>
-    </footer>`;
-}
-
-function renderAll(){
-    document.getElementById('nav-container').innerHTML=renderNav();
-    document.getElementById('home-content').innerHTML=renderHome();
-    document.getElementById('overture-content').innerHTML=renderOverture();
-    document.getElementById('dev-content').innerHTML=renderDev();
-    document.getElementById('botanical-content').innerHTML=renderBotanical();
-    document.getElementById('team-content').innerHTML=renderTeam();
-    document.getElementById('gallery-content').innerHTML=renderGallery();
-    document.getElementById('climax-content').innerHTML=renderClimax();
-    document.getElementById('dashboard-content').innerHTML=renderDashboard();
-    document.getElementById('footer-container').innerHTML=renderFooter();
-    /* Re-activate current page */
-    document.querySelectorAll('.page-container').forEach(p=>p.classList.remove('page-active'));
-    const cur=document.getElementById('page-'+appState.currentPage);
-    if(cur)cur.classList.add('page-active');
-    /* Update sign-in modal text */
-    const si=document.getElementById('signin-modal');
-    if(si){
-        si.querySelector('h3').textContent=t('modal_signin_title');
-        si.querySelector('label[for="email"]').textContent=t('modal_email');
-        si.querySelector('label[for="password"]').textContent=t('modal_pass');
-        si.querySelector('button[type="submit"]').innerHTML=`<i class="fa-solid fa-right-to-bracket mr-2"></i>${t('modal_access')}`;
-        si.querySelector('.remember-label').textContent=t('modal_remember');
-        si.querySelector('.forgot-link').textContent=t('modal_forgot');
-    }
-    setTimeout(observeAnimations,50);
-}
-
-/* ======================== INIT ======================== */
-document.addEventListener('DOMContentLoaded',()=>{
-    renderAll();
-    /* Set home as active */
-    document.getElementById('page-home').classList.add('page-active');
-    setTimeout(observeAnimations,200);
-
-    /* Close modals on backdrop click */
-    document.querySelectorAll('.modal-backdrop').forEach(m=>{
-        m.addEventListener('click',(e)=>{if(e.target===m){m.classList.add('hidden');document.body.style.overflow=''}});
-    });
-
-    /* Close mobile menu on outside click */
-    document.addEventListener('click',(e)=>{
-        if(appState.mobileMenuOpen && !e.target.closest('#mobile-menu') && !e.target.closest('[onclick*="toggleMobileMenu"]')){
-            closeMobileMenu();
-        }
-    });
-
-    /* Keyboard: Escape closes modals */
-    document.addEventListener('keydown',(e)=>{
-        if(e.key==='Escape'){
-            document.querySelectorAll('.modal-backdrop:not(.hidden)').forEach(m=>{m.classList.add('hidden');document.body.style.overflow=''});
-            closeMobileMenu();
-        }
-    });
-});
-</script>
-
-<!-- ======================== NAVIGATION ======================== -->
-<div id="nav-container"></div>
-
-<!-- ======================== PAGES ======================== -->
-<main class="relative" style="min-height:100vh">
-    <div id="page-home" class="page-container"><div id="home-content"></div></div>
-    <div id="page-overture" class="page-container"><div id="overture-content"></div></div>
-    <div id="page-dev" class="page-container"><div id="dev-content"></div></div>
-    <div id="page-botanical" class="page-container"><div id="botanical-content"></div></div>
-    <div id="page-team" class="page-container"><div id="team-content"></div></div>
-    <div id="page-gallery" class="page-container"><div id="gallery-content"></div></div>
-    <div id="page-climax" class="page-container"><div id="climax-content"></div></div>
-    <div id="page-dashboard" class="page-container"><div id="dashboard-content"></div></div>
-</main>
-
-<!-- ======================== FOOTER ======================== -->
-<div id="footer-container"></div>
-
-<!-- ======================== SIGN IN MODAL ======================== -->
-<div id="signin-modal" class="modal-backdrop hidden fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
-    <div class="bg-eco-gray border border-eco-border rounded-2xl p-10 w-full max-w-md relative">
-        <button onclick="closeModal('signin-modal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-neutral-500 hover:text-white hover:bg-white/10 transition-all"><i class="fa-solid fa-xmark text-sm"></i></button>
-        <div class="flex items-center gap-3 mb-8">
-            <div class="w-10 h-10 rounded-full bg-eco-lime/20 flex items-center justify-center"><i class="fa-solid fa-leaf text-eco-lime text-sm"></i></div>
-            <h3 class="font-partitura text-2xl font-bold">Sign In</h3>
-        </div>
-        <form onsubmit="handleSignIn(event)" class="space-y-5">
-            <div>
-                <label for="email" class="block text-xs text-neutral-500 uppercase tracking-widest mb-2">Email</label>
-                <input type="email" id="email" required placeholder="mario@econet.coop" class="w-full bg-eco-black border border-eco-border rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-neutral-700 focus:outline-none focus:border-eco-lime/50 transition-colors">
-            </div>
-            <div>
-                <label for="password" class="block text-xs text-neutral-500 uppercase tracking-widest mb-2">Password</label>
-                <input type="password" id="password" required placeholder="••••••••" class="w-full bg-eco-black border border-eco-border rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-neutral-700 focus:outline-none focus:border-eco-lime/50 transition-colors">
-            </div>
-            <div class="flex items-center justify-between">
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" class="w-4 h-4 rounded border-eco-border bg-eco-black accent-eco-lime">
-                    <span class="remember-label text-xs text-neutral-500">Remember me</span>
-                </label>
-                <a href="#" class="forgot-link text-xs text-eco-lime/60 hover:text-eco-lime transition-colors">Forgot password?</a>
-            </div>
-            <button type="submit" class="w-full bg-eco-lime text-eco-black py-4 rounded-xl text-sm font-bold uppercase tracking-wider hover:shadow-[0_0_30px_rgba(132,192,22,.3)] transition-all">
-                <i class="fa-solid fa-right-to-bracket mr-2"></i>Access Hub
-            </button>
-        </form>
+        <div class="floating-node">🤝</div>
+        <div class="floating-node">🌾</div>
+        <div class="floating-node">📦</div>
+        <div class="floating-node">🛡️</div>
+        <div class="floating-node">🔬</div>
+      </div>
     </div>
-</div>
+  </section>
 
-<!-- ======================== IMAGE MODAL ======================== -->
-<div id="image-modal" class="modal-backdrop hidden fixed inset-0 z-[70] bg-black/90 backdrop-blur-md flex items-center justify-center p-6 cursor-zoom-out" onclick="if(event.target===this){closeModal('image-modal');document.body.style.overflow=''}" onmousemove="handleModalZoom(event)">
-    <button onclick="closeModal('image-modal');document.body.style.overflow=''" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"><i class="fa-solid fa-xmark"></i></button>
-    <div class="max-w-5xl max-h-[85vh] overflow-hidden rounded-2xl">
-        <img src="" alt="" class="max-w-full max-h-[85vh] object-contain" style="transform-origin:center center">
+  <!-- ========== MISSION ========== -->
+  <section class="mission" id="missione">
+    <div class="container text-center">
+      <div class="section-label reveal" data-i18n="mission_label"><span class="icon">🏛️</span> Missione & Valori</div>
+      <h2 class="section-title reveal reveal-delay-1">
+        <span data-i18n="mission_title_1">Green Social Network: una </span><span class="highlight" data-i18n="mission_title_2">rete che cambia</span><span data-i18n="mission_title_3"> il territorio</span>
+      </h2>
+      <p class="section-subtitle centered reveal reveal-delay-2" data-i18n="mission_subtitle">
+        EcoNet opera sotto la direzione del Dott. Giovanni Giovanelli Luigi, creando connessioni sinergiche tra cooperative, enti, scuole e imprese locali.
+      </p>
+      <div class="mission-grid">
+        <div class="mission-card reveal reveal-delay-1">
+          <div class="mission-card-icon green">⚖️</div>
+          <h3 data-i18n="mission_card1_title">Legalità & Diritti</h3>
+          <p data-i18n="mission_card1_desc">Contrasto sistematico al caporalato attraverso assunzioni trasparenti, contratti regolari e tutele per ogni lavoratore straniero.</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-2">
+          <div class="mission-card-icon teal">🌿</div>
+          <h3 data-i18n="mission_card2_title">Sostenibilità Ecologica</h3>
+          <p data-i18n="mission_card2_desc">Filiera corta a zero impatto di trasporto, produzione autoctona esclusiva e recupero dei terreni agricoli dismessi.</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-3">
+          <div class="mission-card-icon gold">🤝</div>
+          <h3 data-i18n="mission_card3_title">Coesione Sociale</h3>
+          <p data-i18n="mission_card3_desc">Integrazione comunitaria dei lavoratori, educazione alimentare per i più piccoli e valorizzazione della flora spontanea locale.</p>
+        </div>
+      </div>
     </div>
-    <p class="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-neutral-400 font-light bg-black/60 backdrop-blur-sm px-5 py-2 rounded-full"></p>
-</div>
+  </section>
 
-<!-- ======================== TOAST ======================== -->
-<div id="toast" class="toast fixed bottom-8 left-1/2 -translate-x-1/2 z-[80] bg-eco-gray border border-eco-border rounded-xl px-6 py-4 text-sm font-medium shadow-2xl flex items-center"></div>
+  <!-- ========== ISTITUZIONALE ========== -->
+  <section class="institutional-section" id="istituzionale">
+    <div class="container text-center">
+      <div class="acli-logo-banner reveal">
+        <img src="logo-econet.jpg" alt="EcoNet" style="height: 55px;" />
+        <span style="font-size: 1.5rem; font-weight: 300;">✕</span>
+        <img src="logo-acli.jpg" alt="A.C.L.I. Logo" />
+      </div>
+      <div class="section-label reveal" data-i18n="inst_label"><span class="icon">🏛️</span> Rete Istituzionale & Patrocinio</div>
+      <h2 class="section-title reveal reveal-delay-1">
+        <span data-i18n="inst_title_1">EcoNet nella Rete di Imprese delle </span><span class="highlight" data-i18n="inst_title_2">A.C.L.I. Ceglie del Campo (Bari)</span>
+      </h2>
+      <p class="section-subtitle centered reveal reveal-delay-2" data-i18n="inst_subtitle">
+        Direzione Operativa e Patrocinio Progettuale curati dal Sig. Luigi Giovanelli.
+      </p>
+      <div class="mission-grid" style="margin-top: 3rem;">
+        <div class="mission-card reveal reveal-delay-1">
+          <div class="mission-card-icon green">🏢</div>
+          <h3 data-i18n="inst_card1_title">A.C.L.I. Ceglie del Campo</h3>
+          <p data-i18n="inst_card1_desc">EcoNet è parte integrante della Rete di Imprese Progettuali promossa da A.C.L.I.</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-2">
+          <div class="mission-card-icon teal">👔</div>
+          <h3 data-i18n="inst_card2_title">Direzione Operativa</h3>
+          <p data-i18n="inst_card2_desc">Guida strategica e direzione operativa a cura del Sig. Luigi Giovanelli.</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-3">
+          <div class="mission-card-icon gold">📜</div>
+          <h3 data-i18n="inst_card3_title">Patrocinio Progettuale</h3>
+          <p data-i18n="inst_card3_desc">Sostegno istituzionale per lo sviluppo sostenibile dell'agricoltura sociale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ========== AGRICOLTURA ========== -->
+  <section id="agricoltura">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label reveal"><span class="icon">🌾</span> Pilastro Agricolo</div>
+        <h2 class="section-title reveal reveal-delay-1">Recupero Terreni & <span class="highlight">Km 0 Reale</span></h2>
+        <p class="section-subtitle centered reveal reveal-delay-2">Stipula di contratti di comodato d'uso gratuito per terreni agricoli in disuso.</p>
+      </div>
+      <div class="process-flow reveal" style="margin-top: 2rem;">
+        <div class="process-step">
+          <span class="step-icon">👤</span>
+          <h4>Selezione</h4>
+          <p>Selezione trasparente tramite cooperativa sociale</p>
+        </div>
+        <div class="process-step">
+          <span class="step-icon">📝</span>
+          <h4>Contratto Regolare</h4>
+          <p>100% contratti territoriali di categoria</p>
+        </div>
+        <div class="process-step">
+          <span class="step-icon">🎓</span>
+          <h4>Formazione</h4>
+          <p>Tecnica agricola, sicurezza e lingua italiana</p>
+        </div>
+        <div class="process-step">
+          <span class="step-icon">🏠</span>
+          <h4>Integrazione</h4>
+          <p>Percorsi comunitari e stabilizzazione lavorativa</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FILIERA PRODUTTIVA ========== -->
+  <section id="filiera">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label reveal"><span class="icon">🏭</span> Filiera Produttiva</div>
+        <h2 class="section-title reveal reveal-delay-1">Distribuzione <span class="highlight">B2B & B2C</span></h2>
+        <p class="section-subtitle centered reveal reveal-delay-2">Dalla raccolta manuale al consumatore: un flusso logistico snello e a basso impatto.</p>
+      </div>
+      <div class="process-flow reveal" style="margin-top: 2rem;">
+        <div class="process-step">
+          <span class="step-icon">🌱</span>
+          <h4>Raccolta</h4>
+          <p>Manuale dagli orti a km 0</p>
+        </div>
+        <div class="process-step">
+          <span class="step-icon">🏭</span>
+          <h4>Mondatura</h4>
+          <p>Pulizia e confezionamento</p>
+        </div>
+        <div class="process-step">
+          <span class="step-icon">🏷️</span>
+          <h4>Etichettatura</h4>
+          <p>Tracciabilità completa</p>
+        </div>
+        <div class="process-step">
+          <span class="step-icon">🚛</span>
+          <h4>Logistica</h4>
+          <p>Distribuzione con basso impatto</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== KPI DASHBOARD ========== -->
+  <section class="kpi-section" id="kpi">
+    <div class="container text-center">
+      <div class="section-label reveal"><span class="icon">📊</span> Dashboard KPI</div>
+      <h2 class="section-title reveal reveal-delay-1">Indicatori di <span class="highlight">Performance</span></h2>
+      <p class="section-subtitle centered reveal reveal-delay-2">20 KPI strategici per monitorare prestazioni e impatto.</p>
+      <div class="mission-grid" style="margin-top: 3rem;">
+        <div class="mission-card reveal">
+          <div class="mission-card-icon green">🤝</div>
+          <h3>Cooperative Partner</h3>
+          <p>Realtà cooperative che collaborano attivamente nel network.</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-1">
+          <div class="mission-card-icon teal">💰</div>
+          <h3>Sostenibilità Finanziaria</h3>
+          <p>Rapporto ricavi propri / costi operativi.</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-2">
+          <div class="mission-card-icon gold">🎯</div>
+          <h3>Governance</h3>
+          <p>% obiettivi strategici raggiunti entro scadenze.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EDUCAZIONE ========== -->
+  <section id="educazione">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label reveal"><span class="icon">🌿</span> Hub Educativo</div>
+        <h2 class="section-title reveal reveal-delay-1">Educazione Alimentare & <span class="highlight">Percorsi Botanici</span></h2>
+      </div>
+      <div class="mission-grid" style="margin-top: 3rem;">
+        <div class="mission-card reveal">
+          <div class="mission-card-icon green">🍎</div>
+          <h3>Orti Didattici</h3>
+          <p>Laboratori per scuole dell'infanzia e primarie. Esperienza "Seme-Pianta" dal seme al piatto.</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-1">
+          <div class="mission-card-icon teal">🔬</div>
+          <h3>Percorsi Botanici</h3>
+          <p>Passeggiate guidate alla scoperta delle erbe spontanee e officinali del territorio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CALCOLATORE D'IMPATTO ========== -->
+  <section id="calcolatore">
+    <div class="container text-center">
+      <div class="section-label reveal"><span class="icon">🧮</span> Sostenibilità in Cifre</div>
+      <h2 class="section-title reveal reveal-delay-1">Calcolatore d'<span class="highlight">Impatto Etico & Ecologico</span></h2>
+      <p class="section-subtitle centered reveal reveal-delay-2">Simula il valore generato per il territorio.</p>
+      <div class="mission-grid" style="margin-top: 3rem;">
+        <div class="mission-card reveal">
+          <span class="icon">🌍</span>
+          <h3>CO₂ Risparmiati</h3>
+          <p>kg CO₂ risparmiati annualmente</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-1">
+          <span class="icon">🏞️</span>
+          <h3>Terreno Riscattato</h3>
+          <p>m² di terreno agricolo recuperato</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-2">
+          <span class="icon">🛡️</span>
+          <h3>Lavoro Etico</h3>
+          <p>Ore di lavoro etico annuale</p>
+        </div>
+        <div class="mission-card reveal reveal-delay-3">
+          <span class="icon">🐝</span>
+          <h3>Biodiversità</h3>
+          <p>Supporto alla biodiversità locale</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRENOTAZIONI ========== -->
+  <section id="prenotazione">
+    <div class="container text-center">
+      <div class="section-label reveal"><span class="icon">📝</span> Modulo Operativo</div>
+      <h2 class="section-title reveal reveal-delay-1">Prenotazioni & <span class="highlight">Richieste d'Integrazione</span></h2>
+      <p class="section-subtitle centered reveal reveal-delay-2">Sottoscrivi cassette, richiedi forniture o prenota laboratori didattici.</p>
+      <form id="bookingForm" class="form-grid" style="margin-top: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <div class="field-group">
+          <label for="userName">Nome e Cognome</label>
+          <input type="text" id="userName" required placeholder="Mario Rossi" />
+        </div>
+        <div class="field-group">
+          <label for="userEmail">Email</label>
+          <input type="email" id="userEmail" required placeholder="mario@email.com" />
+        </div>
+        <div class="field-group">
+          <label for="userPhone">Telefono</label>
+          <input type="tel" id="userPhone" required placeholder="+39 340 0000000" />
+        </div>
+        <div class="field-group span-2">
+          <button type="submit" class="btn btn-primary">🌱 Invia Richiesta</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section id="contatti">
+    <div class="container text-center">
+      <div class="section-label reveal"><span class="icon">💬</span> Unisciti alla Rete</div>
+      <h2 class="section-title reveal reveal-delay-1">Diventa parte del <span class="highlight">Green Social Network</span></h2>
+      <div style="margin-top: 2rem;">
+        <p>Sei una cooperativa, un ente pubblico, una scuola o un ristoratore etico? EcoNet è la rete che fa per te.</p>
+        <a href="mailto:info@econet.coop" class="btn btn-primary">✉️ Scrivici</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="logo-econet.jpg" alt="EcoNet" class="footer-logo" />
+        </div>
+        <div class="footer-info">
+          Cooperativa Sociale • Direzione: Dott. Giovanni Giovanelli Luigi • © 2026
+        </div>
+        <div class="footer-acli">
+          <img src="logo-acli.jpg" alt="A.C.L.I." />
+          <span>A.C.L.I. — Sezione Ceglie del Campo (Bari)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="script.js"></script>
 </body>
 </html>
