@@ -149,6 +149,15 @@
     body.dark-mode .modal-close:hover {
       color: #f1f5f9;
     }
+    
+    /* ========== BLUEPRINT SPECIFIC STYLES ========== */
+    .blueprint-section {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      padding: 2rem;
+      border-radius: 12px;
+      border-left: 4px solid #4ade80;
+      margin-bottom: 1.5rem;
+    }
   </style>
 </head>
 <body>
@@ -503,6 +512,41 @@
       </form>
     </div>
   </section>
+
+  <!-- ========== BLUEPRINT SECTION ========== -->
+  <section id="blueprint">
+    <div class="container text-center">
+      <div class="section-label reveal"><span class="icon">📐</span> Blueprint Progettuale</div>
+      <h2 class="section-title reveal reveal-delay-1">Architettura <span class="highlight">Tecnica & Operativa</span></h2>
+      <p class="section-subtitle centered reveal reveal-delay-2">Visualizza i blueprint completi del progetto EcoNet e della dashboard KPI.</p>
+      <div class="mission-grid" style="margin-top: 3rem;">
+        <div class="mission-card reveal">
+          <div class="mission-card-icon green">🏗️</div>
+          <h3>Blueprint Progetto</h3>
+          <p>Architettura completa di governance, asset, infrastrutture e operazioni EcoNet.</p>
+          <button class="btn btn-primary" onclick="openBlueprintModal('project')" style="margin-top: 1rem; width: 100%;">📊 Visualizza</button>
+        </div>
+        <div class="mission-card reveal reveal-delay-1">
+          <div class="mission-card-icon teal">📈</div>
+          <h3>Blueprint KPI</h3>
+          <p>20 indicatori strategici per monitorare prestazioni, governance e impatto sociale.</p>
+          <button class="btn btn-primary" onclick="openBlueprintModal('kpi')" style="margin-top: 1rem; width: 100%;">📊 Visualizza</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BLUEPRINT MODAL ========== -->
+  <div id="blueprintModal" class="modal">
+    <div class="modal-content" style="max-width: 900px; max-height: 90vh; overflow-y: auto;">
+      <button class="modal-close" onclick="closeBlueprintModal()">✕</button>
+      <div id="blueprintContent"></div>
+      <div style="margin-top: 2rem; text-align: center;">
+        <button class="btn btn-primary" onclick="downloadBlueprintPDF()" style="margin-right: 1rem;">📥 Scarica PDF</button>
+        <button class="btn btn-secondary" onclick="closeBlueprintModal()">Chiudi</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ========== CTA ========== -->
   <section id="contatti">

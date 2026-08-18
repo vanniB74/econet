@@ -44,6 +44,11 @@ const T = {
     form_submit: "🌱 Invia Richiesta",
     form_success: "Richiesta inviata con successo!",
     form_error: "Errore nell'invio della richiesta. Riprova.",
+    
+    blueprint_label: "📐 Blueprint Progettuale",
+    blueprint_title_1: "Architettura ",
+    blueprint_title_2: "Tecnica & Operativa",
+    blueprint_subtitle: "Visualizza i blueprint completi del progetto EcoNet e della dashboard KPI.",
   },
   en: {
     nav_mission: "Mission",
@@ -89,6 +94,11 @@ const T = {
     form_submit: "🌱 Submit Request",
     form_success: "Request sent successfully!",
     form_error: "Error sending request. Please try again.",
+    
+    blueprint_label: "📐 Project Blueprint",
+    blueprint_title_1: "Technical ",
+    blueprint_title_2: "& Operational Architecture",
+    blueprint_subtitle: "View the complete blueprints of the EcoNet project and KPI dashboard.",
   },
   fr: {
     nav_mission: "Mission",
@@ -134,6 +144,11 @@ const T = {
     form_submit: "🌱 Soumettre la Demande",
     form_success: "Demande envoyée avec succès!",
     form_error: "Erreur lors de l'envoi de la demande. Réessayez.",
+    
+    blueprint_label: "📐 Blueprint du Projet",
+    blueprint_title_1: "Architecture ",
+    blueprint_title_2: "Technique & Opérationnelle",
+    blueprint_subtitle: "Visualisez les plans complets du projet EcoNet et du tableau de bord KPI.",
   },
   de: {
     nav_mission: "Mission",
@@ -179,6 +194,11 @@ const T = {
     form_submit: "🌱 Anfrage Einreichen",
     form_success: "Anfrage erfolgreich gesendet!",
     form_error: "Fehler beim Senden der Anfrage. Bitte versuchen Sie es erneut.",
+    
+    blueprint_label: "📐 Projektblaupause",
+    blueprint_title_1: "Technische ",
+    blueprint_title_2: "& Betriebsarchitektur",
+    blueprint_subtitle: "Sehen Sie die vollständigen Blaupausen des EcoNet-Projekts und des KPI-Dashboards.",
   },
 };
 

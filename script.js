@@ -332,6 +332,210 @@ if (!CSS.supports('scroll-behavior: smooth')) {
   });
 }
 
+// ========== BLUEPRINT MANAGEMENT ==========
+function generateProjectBlueprint() {
+  return `
+    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 2rem; border-radius: 12px; color: #e2e8f0;">
+      <h3 style="color: #4ade80; margin-bottom: 1.5rem; font-size: 1.5rem;">🏗️ EcoNet Blueprint Progettuale</h3>
+      
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="color: #cbd5e1; margin-bottom: 0.75rem;">1. GOVERNANCE ISTITUZIONALE & ASSET MANAGEMENT</h4>
+        <p style="color: #94a3b8; line-height: 1.6;">
+          <strong>Direzione Operativa:</strong> Dott. Giovanni Giovanelli Luigi<br/>
+          <strong>Patronato:</strong> A.C.L.I. Sezione Ceglie del Campo (Bari)<br/>
+          <strong>Coordinamento Strategico:</strong> Sviluppo Network EcoNet.Green Social Network HUB<br/>
+          <strong>Responsabile Operativo:</strong> Cassano Giuseppe
+        </p>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="color: #cbd5e1; margin-bottom: 0.75rem;">2. PILASTRO PRODROMICO: FORMAZIONE A PRIORI</h4>
+        <p style="color: #94a3b8; line-height: 1.6;">
+          ↳ Formazione Tecnica/Biologica → Sicurezza HACCP/Manutenzione → Integrazione Linguistica/Legalità → STOP CAPORALATO
+        </p>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="color: #cbd5e1; margin-bottom: 0.75rem;">3. ASSET IMMOBILIARI, BONIFICHE & INFRASTRUTTURE</h4>
+        <p style="color: #94a3b8; line-height: 1.6;">
+          Riqualificazione Fondiaria & Bonifiche → Domotica Digitale → Manutenzione Maredt → Magazzini Operativi<br/>
+          <strong>Modello Asset Sharing</strong> per sostenibilità operativa
+        </p>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="color: #cbd5e1; margin-bottom: 0.75rem;">4. SOTTOSEZIONE AGRICOLA: APICULTURA & TRASFORMAZIONE</h4>
+        <p style="color: #94a3b8; line-height: 1.6;">
+          Impollinazione Miele → Parco Machine Apistici → Produzione Colture Autoctone
+        </p>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="color: #cbd5e1; margin-bottom: 0.75rem;">5. MAGAZZINO DI TRASFORMAZIONE AGRICOLA</h4>
+        <p style="color: #94a3b8; line-height: 1.6;">
+          Ortofrutta Autoctona (Mondatura, Lavorazione, Confezionamento K.m) → Apicoltura (Smielatura, Decantamento, Filtratura) → Erbe Spontanee di Celle del Campo
+        </p>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="color: #cbd5e1; margin-bottom: 0.75rem;">6. IMPATTO SOCIALE & DISTRIBUZIONE</h4>
+        <p style="color: #94a3b8; line-height: 1.6;">
+          Regionale Lavoro-Attivato (Mercato, Horeca, Logistica, Enoteca) → Spaccio, Cassette, Miele
+        </p>
+      </div>
+
+      <div style="border-top: 2px solid #334155; padding-top: 1rem; margin-top: 1rem;">
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          <strong>Visione Strategica:</strong> Rete cooperativa territoriale per agricoltura etica, inclusione sociale, km 0 reale e contrasto al caporalato.
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+function generateKPIBlueprint() {
+  return `
+    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 2rem; border-radius: 12px; color: #e2e8f0;">
+      <h3 style="color: #4ade80; margin-bottom: 1.5rem; font-size: 1.5rem;">📊 Dashboard KPI - 20 Indicatori Strategici</h3>
+      
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">🤝 GOVERNANCE (4 KPI)</h4>
+        <ul style="color: #94a3b8; margin-left: 1.5rem;">
+          <li>% Partecipazione assemblea annuale</li>
+          <li>Composizione genere board (M/F %)</li>
+          <li>Trasparenza documentale (score 0-100)</li>
+          <li>Audit compliance (conformità % annuale)</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">🌾 PILASTRO AGRICOLO (4 KPI)</h4>
+        <ul style="color: #94a3b8; margin-left: 1.5rem;">
+          <li>Terreni recuperati (m²/anno)</li>
+          <li>Produzione biologica (kg/anno)</li>
+          <li>Biodiversità varietale (n. specie autoctone)</li>
+          <li>km zero certificati (%)</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">👥 PILASTRO SOCIALE (4 KPI)</h4>
+        <ul style="color: #94a3b8; margin-left: 1.5rem;">
+          <li>Occupati con contratto regolare (n.)</li>
+          <li>Stranieri integrati (n. e % della forza lavoro)</li>
+          <li>Ore formazione/anno (media per addetto)</li>
+          <li>Casi caporalato prevenuti/bloccati (n.)</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">💼 PILASTRO COMMERCIALE (4 KPI)</h4>
+        <ul style="color: #94a3b8; margin-left: 1.5rem;">
+          <li>Ricavi da filiera diretta (€/anno)</li>
+          <li>Cooperative partner attive (n.)</li>
+          <li>Punti vendita B2C/B2B (n. canali)</li>
+          <li>Sostenibilità finanziaria (ricavi propri / costi operativi %)</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">🎓 PILASTRO EDUCATIVO (4 KPI)</h4>
+        <ul style="color: #94a3b8; margin-left: 1.5rem;">
+          <li>Scuole coinvolte in programmi didattici (n.)</li>
+          <li>Studenti coinvolti/anno (n.)</li>
+          <li>Percorsi botanici guidati/anno (n.)</li>
+          <li>Certificazioni educative rilasciate (n.)</li>
+        </ul>
+      </div>
+
+      <div style="border-top: 2px solid #334155; padding-top: 1rem; margin-top: 1rem;">
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          <strong>Aggiornamento:</strong> Trimestrale | <strong>Revisione Strategica:</strong> Annuale | <strong>Benchmark:</strong> Rete A.C.L.I. + Cooperative Sostenibili
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+function openBlueprintModal(type) {
+  const modal = document.getElementById('blueprintModal');
+  const content = document.getElementById('blueprintContent');
+  
+  if (type === 'project') {
+    content.innerHTML = generateProjectBlueprint();
+    window.currentBlueprint = 'project';
+  } else if (type === 'kpi') {
+    content.innerHTML = generateKPIBlueprint();
+    window.currentBlueprint = 'kpi';
+  }
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBlueprintModal() {
+  const modal = document.getElementById('blueprintModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+function downloadBlueprintPDF() {
+  const type = window.currentBlueprint || 'project';
+  const title = type === 'project' ? 'EcoNet_Blueprint_Progettuale' : 'EcoNet_Blueprint_KPI';
+  
+  // For simplicity, we'll use a browser print-to-PDF approach
+  showNotification('📥 Preparazione PDF in corso... Usa il menù di stampa per salvare.', 'info');
+  
+  // Create a new window for printing
+  const printWindow = window.open('', '', 'width=800,height=600');
+  const content = document.getElementById('blueprintContent').innerHTML;
+  
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>${title}</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #0f172a;
+          color: #e2e8f0;
+          padding: 2rem;
+        }
+        h3 { color: #4ade80; }
+        h4 { color: #14b8a6; }
+        p, li { color: #94a3b8; }
+        @media print {
+          body { background-color: white; }
+          h3, h4 { color: #000; }
+          p, li { color: #333; }
+        }
+      </style>
+    </head>
+    <body>
+      ${content}
+      <p style="margin-top: 2rem; border-top: 1px solid #334155; padding-top: 1rem; font-size: 0.85rem;">
+        Scaricato da: EcoNet Green Social Network | Data: ${new Date().toLocaleDateString('it-IT')}
+      </p>
+    </body>
+    </html>
+  `);
+  printWindow.document.close();
+  
+  // Auto-print after a delay
+  setTimeout(() => {
+    printWindow.print();
+  }, 500);
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('blueprintModal');
+  if (modal && e.target === modal) {
+    closeBlueprintModal();
+  }
+});
+
 // ========== PERFORMANCE OPTIMIZATION ==========
 // Lazy load images (if any)
 if ('IntersectionObserver' in window) {
