@@ -396,10 +396,96 @@ function generateProjectBlueprint() {
 function generateKPIBlueprint() {
   return `
     <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 2rem; border-radius: 12px; color: #e2e8f0;">
-      <h3 style="color: #4ade80; margin-bottom: 1.5rem; font-size: 1.5rem;">📊 Dashboard KPI - 20 Indicatori Strategici</h3>
+      <h3 style="color: #4ade80; margin-bottom: 1.5rem; font-size: 1.5rem;">📊 EcoNet KPI Strategic Blueprint</h3>
+      
+      <!-- KPI Infographic Structure -->
+      <div style="background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h4 style="color: #10b981; font-size: 1.3rem; margin-bottom: 0.5rem;">GREEN SOCIAL NETWORK</h4>
+          <p style="color: #666; font-size: 0.9rem;">INDICI KPI STRATEGICI | BLUEPRINT OPERATIVO</p>
+        </div>
+
+        <!-- Main Flow Structure -->
+        <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 1rem; align-items: center;">
+          
+          <!-- Left Column: Pillars -->
+          <div>
+            <!-- Governance -->
+            <div style="background: #f0f9ff; border-left: 4px solid #10b981; padding: 1rem; margin-bottom: 1rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">🤝 GOVERNANCE & INTEGRAZIONE</p>
+              <p style="font-size: 0.85rem; color: #666;">ACLI "Cieli del Campo"</p>
+            </div>
+
+            <!-- Agriculture -->
+            <div style="background: #f0fdf4; border-left: 4px solid #10b981; padding: 1rem; margin-bottom: 1rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">🌾 AGRICOLI</p>
+              <p style="font-size: 0.85rem; color: #666;">Terreni & Biodiversità</p>
+            </div>
+
+            <!-- Social -->
+            <div style="background: #f5f3ff; border-left: 4px solid #10b981; padding: 1rem; margin-bottom: 1rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">👥 SOCIALI</p>
+              <p style="font-size: 0.85rem; color: #666;">Inclusione & Dignità (Contratto Caporalato)</p>
+            </div>
+
+            <!-- Production -->
+            <div style="background: #fef3c7; border-left: 4px solid #10b981; padding: 1rem; margin-bottom: 1rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">🏭 PRODUTTIVI & COMMERCIALI</p>
+              <p style="font-size: 0.85rem; color: #666;">Filiera B2B/B2C</p>
+            </div>
+
+            <!-- Education -->
+            <div style="background: #dcfce7; border-left: 4px solid #10b981; padding: 1rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">🎓 EDUCATIVI & BOTANICI</p>
+              <p style="font-size: 0.85rem; color: #666;">Orti Didattici & Percorsi</p>
+            </div>
+          </div>
+
+          <!-- Center Column: Central Core -->
+          <div style="text-align: center;">
+            <div style="background: linear-gradient(135deg, #10b981, #14b8a6); padding: 2rem; border-radius: 12px; color: white; margin-bottom: 1.5rem;">
+              <p style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</p>
+              <h4 style="margin: 0; color: white;">ECONET CORE FLOW</h4>
+            </div>
+            <div style="background: #e0f2fe; padding: 1.5rem; border-radius: 12px; color: #1f2937;">
+              <p style="font-weight: bold; margin-bottom: 0.5rem;">KPI TARGET</p>
+              <p style="font-size: 1.5rem; margin: 0; color: #10b981;">314.463</p>
+              <p style="font-size: 0.85rem; margin-top: 0.5rem;">Units/Kg/Hours</p>
+            </div>
+          </div>
+
+          <!-- Right Column: KPI Examples -->
+          <div style="font-size: 0.85rem;">
+            <div style="background: #f0f9ff; border: 1px solid #bfdbfe; padding: 0.75rem; margin-bottom: 0.75rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin: 0 0 0.25rem 0;">Numero Associati Attivi</p>
+              <p style="color: #666; margin: 0;">KPI Candidato</p>
+            </div>
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.75rem; margin-bottom: 0.75rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin: 0 0 0.25rem 0;">Superficie Totale in Comodato</p>
+              <p style="color: #666; margin: 0;">m²/anno (ettari)</p>
+            </div>
+            <div style="background: #f5f3ff; border: 1px solid #e9d5ff; padding: 0.75rem; margin-bottom: 0.75rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin: 0 0 0.25rem 0;">Contratti Regolari</p>
+              <p style="color: #666; margin: 0;">100% Target</p>
+            </div>
+            <div style="background: #fef3c7; border: 1px solid #fcd34d; padding: 0.75rem; border-radius: 6px;">
+              <p style="font-weight: bold; color: #1f2937; margin: 0 0 0.25rem 0;">Volume Vendita</p>
+              <p style="color: #666; margin: 0;">kg/mese</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Metric -->
+        <div style="background: #10b981; color: white; padding: 1rem; border-radius: 6px; text-align: center; margin-top: 2rem;">
+          <p style="font-weight: bold; margin: 0;">METRICA CHIAVE: % CONTRATTI REGOLARI (100%)</p>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; margin-bottom: 0;">Indicatore di sostenibilità sociale e legalità operativa</p>
+        </div>
+      </div>
+
+      <h4 style="color: #14b8a6; margin-bottom: 1rem;">📋 20 Indicatori Strategici per Pilastro</h4>
       
       <div style="margin-bottom: 1rem;">
-        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">🤝 GOVERNANCE (4 KPI)</h4>
+        <h5 style="color: #cbd5e1; margin-bottom: 0.75rem;">🤝 GOVERNANCE (4 KPI)</h5>
         <ul style="color: #94a3b8; margin-left: 1.5rem;">
           <li>% Partecipazione assemblea annuale</li>
           <li>Composizione genere board (M/F %)</li>
@@ -409,7 +495,7 @@ function generateKPIBlueprint() {
       </div>
 
       <div style="margin-bottom: 1rem;">
-        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">🌾 PILASTRO AGRICOLO (4 KPI)</h4>
+        <h5 style="color: #cbd5e1; margin-bottom: 0.75rem;">🌾 PILASTRO AGRICOLO (4 KPI)</h5>
         <ul style="color: #94a3b8; margin-left: 1.5rem;">
           <li>Terreni recuperati (m²/anno)</li>
           <li>Produzione biologica (kg/anno)</li>
@@ -419,7 +505,7 @@ function generateKPIBlueprint() {
       </div>
 
       <div style="margin-bottom: 1rem;">
-        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">👥 PILASTRO SOCIALE (4 KPI)</h4>
+        <h5 style="color: #cbd5e1; margin-bottom: 0.75rem;">👥 PILASTRO SOCIALE (4 KPI)</h5>
         <ul style="color: #94a3b8; margin-left: 1.5rem;">
           <li>Occupati con contratto regolare (n.)</li>
           <li>Stranieri integrati (n. e % della forza lavoro)</li>
@@ -429,7 +515,7 @@ function generateKPIBlueprint() {
       </div>
 
       <div style="margin-bottom: 1rem;">
-        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">💼 PILASTRO COMMERCIALE (4 KPI)</h4>
+        <h5 style="color: #cbd5e1; margin-bottom: 0.75rem;">💼 PILASTRO COMMERCIALE (4 KPI)</h5>
         <ul style="color: #94a3b8; margin-left: 1.5rem;">
           <li>Ricavi da filiera diretta (€/anno)</li>
           <li>Cooperative partner attive (n.)</li>
@@ -439,7 +525,7 @@ function generateKPIBlueprint() {
       </div>
 
       <div style="margin-bottom: 1rem;">
-        <h4 style="color: #14b8a6; margin-bottom: 0.75rem;">🎓 PILASTRO EDUCATIVO (4 KPI)</h4>
+        <h5 style="color: #cbd5e1; margin-bottom: 0.75rem;">🎓 PILASTRO EDUCATIVO (4 KPI)</h5>
         <ul style="color: #94a3b8; margin-left: 1.5rem;">
           <li>Scuole coinvolte in programmi didattici (n.)</li>
           <li>Studenti coinvolti/anno (n.)</li>
